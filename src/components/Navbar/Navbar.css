@@ -1,0 +1,14 @@
+.navbarContainer{
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem calc((85vw) / 2);
+    z-index: 10;
+    width: 100%;
+    transition: 0.5s;
+  }
+  
+  .navbarContainer:hover{
+    background: rgb(26, 24, 24);
+  }
+  

@@ -1,0 +1,26 @@
+.navLink{
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0 2rem;
+    height: 100%;
+    cursor: pointer;
+    margin-left: 40px;
+  }
+  
+  .navLink h1{
+      font-size: 40px;
+      font: bold;
+      font-weight: 900;
+  }
+  
+  .navLink:hover{
+      transition: all 0.3s ease-in-out;
+      color: #E85300;
+  }
+  
+  .navLink:active{
+      color: #E85300;
+  }
+  
