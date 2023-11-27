@@ -6,6 +6,8 @@
     z-index: 10;
     width: 100%;
     transition: 0.5s;
+    background: transparent;
+    overflow: hidden;
   }
   
   .navbarContainer:hover{

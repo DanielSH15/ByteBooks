@@ -1,0 +1,46 @@
+.wrapper .inputData{
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper .inputData {
+    width: 100%;
+    margin:30px;
+}
+
+.wrapper .inputData label{
+    color: #FFFF;
+    font-weight: 100;
+    font-size: 20px;
+    margin-top: -35px;
+    z-index: 9;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.wrapper .inputData input{
+    border: none;
+    border-bottom: 2px solid silver;
+    background-color: #07080B;
+    color: #FFFF;
+    outline: none;
+    transition: all 0.3s ease;
+    width: 110%;
+}
+
+.inputData input:focus ~ label{
+    transform: translateY(-20px);
+    color: #DB630C;
+}
+
+.inputData input:focus{
+    border-bottom-color: #DB630C;
+}
+.wrapper .inputData input[type=date]{
+    width:145%;
+    color: #07080B;
+}
+
+.wrapper .inputData input[type=date]:focus{
+    color: #FFFF;
+}

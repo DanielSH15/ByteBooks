@@ -1,0 +1,45 @@
+.modalContainer{
+    background-color: #07080B;
+}
+
+.modalContainer h1{
+    color: #DB630C;
+    font-weight: 900;
+}
+
+.modalContainer .inputs{
+    margin-right: 8vh;
+}
+
+.modalContainer .inputContainer{
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.modalContainer .submitContainer{
+    text-align: center;
+}
+
+.modalContainer .submitContainer h2{
+    color: #FFF;
+    margin-top: 5%;
+}
+
+.modalContainer .submitContainer button{
+    border-radius: 55px;
+    font-size: 45px;
+    background-color: #DB630C;
+    color: white;
+    font-weight: 900;
+    border: none;
+    filter: drop-shadow(0 0 0.75rem #DB630C);
+    transition: 0.3s;
+    height: 10vh;
+    width: 32vh;
+    margin-top:5%;
+}
+
+.modalContainer .submitContainer button:hover{
+    filter: drop-shadow(0 0 0.75rem orange);
+}
