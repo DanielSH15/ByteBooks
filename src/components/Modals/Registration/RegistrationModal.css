@@ -1,5 +1,7 @@
 .modalContainer{
     background-color: #07080B;
+    background-image: url('../../../assets/regImage.png');
+    background-size: cover;
 }
 
 .modalContainer h1{
@@ -38,6 +40,7 @@
     height: 10vh;
     width: 32vh;
     margin-top:5%;
+    margin-bottom: 5%;
 }
 
 .modalContainer .submitContainer button:hover{

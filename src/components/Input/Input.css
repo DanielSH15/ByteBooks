@@ -1,3 +1,4 @@
+
 .wrapper .inputData{
     display: flex;
     flex-direction: column;
@@ -21,26 +22,30 @@
 .wrapper .inputData input{
     border: none;
     border-bottom: 2px solid silver;
-    background-color: #07080B;
+    background: transparent;
     color: #FFFF;
     outline: none;
     transition: all 0.3s ease;
     width: 110%;
 }
 
-.inputData input:focus ~ label{
+.inputData input:focus ~ label,
+.inputData input:valid ~ label{
     transform: translateY(-20px);
     color: #DB630C;
 }
 
-.inputData input:focus{
+.inputData input:focus,
+.inputData input:valid 
+{
     border-bottom-color: #DB630C;
 }
 .wrapper .inputData input[type=date]{
-    width:145%;
+    width:144%;
     color: #07080B;
 }
 
-.wrapper .inputData input[type=date]:focus{
+.wrapper .inputData input[type=date]:focus,
+.wrapper .inputData input[type=date]:valid{
     color: #FFFF;
 }

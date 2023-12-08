@@ -1,0 +1,31 @@
+.dropdownitem{
+    display: flex;
+    margin: 10px auto;
+    opacity: 0.9;
+    align-items: center;
+    transition: 0.5s;
+    color: #FFFF;
+}
+
+.dropdownitem .itemTitle{
+    text-decoration: none;
+    color: #FFFF;
+    transition: 0.3s;
+}
+
+.dropdownitem .itemTitle:hover{
+    color: #DB630C;
+}
+
+.dropdownitem div{
+    max-width: 20px;
+    margin-right: 10px;
+    transition: 0.3s;
+}
+
+.dropdownitem:hover{
+    opacity: 1;
+    color: #DB630C;
+    cursor: pointer;
+}
+

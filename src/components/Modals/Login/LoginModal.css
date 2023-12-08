@@ -1,0 +1,57 @@
+.loginModalContainer{
+    background-color: #07080B;
+    background-image: url('../../../assets/loginImage.png');
+    background-size: cover;
+}
+
+.loginModalContainer h1{
+    color: #DB630C;
+    font-weight: 900;
+}
+
+.loginModalContainer .loginInputs{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin-top: 1vh;
+    margin-left: 6vh;
+}
+
+.loginModalContainer .loginInputs input{
+    margin-top: 5vh;
+}
+
+.loginModalContainer .loginInputs h5{
+    margin-left: 47%;
+    display: block;
+    font-size: 20px;
+    color:#DB630C;
+    font-weight: 100;
+}
+
+
+
+.loginModalContainer .loginInputs h2{
+    color: #FFF;
+    margin-top: 5%;
+}
+
+.loginModalContainer .loginInputs button{
+    border-radius: 55px;
+    font-size: 45px;
+    background-color: #DB630C;
+    color: white;
+    font-weight: 900;
+    border: none;
+    filter: drop-shadow(0 0 0.75rem #DB630C);
+    transition: 0.3s;
+    height: 10vh;
+    width: 32vh;
+    margin-top:5%;
+    margin-bottom: 4%;
+    margin-left: 32%;
+}
+
+.loginModalContainer .loginInputs button:hover{
+    filter: drop-shadow(0 0 0.75rem orange);
+}

@@ -1,0 +1,64 @@
+.sliderContainer{
+    width: 100%;
+    height: 60vh;
+    position: absolute;
+    top: 25vh;
+}
+
+.firstSlideContent{
+    background-image: url('../../../assets/libraryRedirect.png');
+    background-size: cover;
+    width:100%;
+    height:60vh;
+    cursor: pointer;
+}
+
+.sliderContainer .firstSlideContent h1{
+    color: #347044;
+    font-size: 96px;
+    font-weight: 800;
+    position: absolute;
+    top: 71%;
+    left: 1%;
+}
+
+.firstSlideContent .redirectLibrary{
+    width:100%;
+    height:100%;
+}
+
+.secondSlideContent{
+    background-image: url('../../../assets/recommendRedirect.png');
+    background-size: cover;
+    width:100%;
+    height:60vh;
+    cursor: pointer;
+}
+
+.sliderContainer .secondSlideContent h1{
+    color: #DB630C;
+    font-size: 96px;
+    font-weight: 800;
+    position: absolute;
+    top: 71%;
+    left: 1%;
+}
+
+.thirdSlideContent{
+    width:100%;
+    height:60vh;
+    background-image: url('../../../assets/postBook.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.sliderContainer .thirdSlideContent h1{
+    color: #0e1680;
+    font-size: 96px;
+    font-weight: 800;
+    position: absolute;
+    top: 71%;
+    left: 1%;
+}

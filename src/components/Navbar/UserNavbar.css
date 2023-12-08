@@ -1,0 +1,20 @@
+.userNavbarContainer{
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    transition: 0.5s;
+    background: transparent;
+  }
+  
+  .userNavbarContainer:hover{
+    background: rgb(26, 24, 24);
+  }
+
+  .userNavbarContainer .searchWrapper{
+    width:98%;
+    margin-left: 70vh;
+    margin-top: 1vh;
+  }
+
+  

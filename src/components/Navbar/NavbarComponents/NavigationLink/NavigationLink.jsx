@@ -5,7 +5,7 @@ import './NavigationLink.css'
 const NavigationLink = (props) => {
   return (
     <Link to={props.location} className='navLink'>
-        <h1>{props.text}</h1>
+        <h1 onClick={props.onClick}>{props.text}</h1>
     </Link>
   )
 }
