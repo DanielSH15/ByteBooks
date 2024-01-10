@@ -1,0 +1,58 @@
+
+
+.wrapper-login .inputData-login{
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper-login .inputData-login {
+    width: 100%;
+    margin:30px;
+}
+
+.wrapper-login .inputData-login label{
+    color: #FFFF;
+    font-weight: 100;
+    font-size: 20px;
+    margin-top: -35px;
+    z-index: 9;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.wrapper-login .inputData-login input{
+    border: none;
+    border-bottom: 2px solid silver;
+    background: transparent;
+    color: #FFFF;
+    outline: none;
+    transition: all 0.3s ease;
+    width: 110%;
+}
+
+.inputData-login input:focus ~ label,
+.inputData-login input:valid ~ label{
+    transform: translateY(-20px);
+    color: #DB630C;
+}
+
+.inputData-login input:focus,
+.inputData-login input:valid 
+{
+    border-bottom-color: #DB630C;
+}
+.wrapper-login .inputData-login input[type=date]{
+    color: #07080B;
+}
+
+.wrapper-login  .inputData-login  input[type=date]:focus,
+.wrapper-login  .inputData-login  input[type=date]:valid{
+    color: #FFFF;
+}
+
+.errorS{
+    font-size: 14px;
+    color: red;
+    display: block;
+    margin-left: 1.5vw;
+}

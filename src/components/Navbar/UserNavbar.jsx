@@ -9,9 +9,11 @@ import axios from 'axios'
 
 const UserNavbar = () => {
   const token = sessionStorage.getItem("token")
-  const [id, setId] = useState('')
+  const id = localStorage.getItem("userId")
   const [username, setUsername] = useState('')
   const[accessKey, setAccessKey] = useState('')
+  const [user, setUser] = useState({})
+  const [userGenres, setUserGenres] = useState([])
 
   const config = {
     headers: {
@@ -24,26 +26,28 @@ const UserNavbar = () => {
 
   const getUser = async() =>{
     await axios.get("http://localhost:5226" + "/api/user/auth/", config).then((response) =>{
-        setId(response.data.userId)
         setUsername(response.data.username)
         setAccessKey(response.data.accessKey)
-        localStorage.setItem("genre", response.data.genre)
+        setUser(response.data)
+        console.log(response.data)
         localStorage.setItem("userId", response.data.userId)
+        sessionStorage.setItem("accessKey", response.data.accessKey)
     })
 }
+
 
 
 useEffect(() =>{
     if(token){
       getUser()
-      sessionStorage.setItem("accessKey", JSON.stringify(accessKey))
+      console.log(id)
     }
   }, [])
 
   return (
     <div className='userNavbarContainer'>
       <Logo />
-      <DropDownMenu username = {username} accessKey={accessKey}/>
+      <DropDownMenu username = {username} accessKey={accessKey} user={user}/>
       <Bell />
       <div className='searchWrapper'>
         <Search />

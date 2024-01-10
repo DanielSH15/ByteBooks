@@ -1,4 +1,6 @@
-.library-recommendations{
-    margin-left: 50vh;
-    color: #fff;
+.rowsB{
+    position: absolute;
+    left: 40%;
+    top:14%;
+    margin: 20px;
 }

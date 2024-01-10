@@ -1,0 +1,9 @@
+.navPagination{
+    position: absolute;
+    top: 105%;
+    right: 48%;
+}
+
+.page-link{
+    cursor: pointer;
+}

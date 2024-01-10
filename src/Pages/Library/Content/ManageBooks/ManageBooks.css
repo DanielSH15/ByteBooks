@@ -1,0 +1,21 @@
+.overall-manage-books-container{
+    margin-top: 5vh;
+}
+
+.overall-manage-books-container h1{
+    text-decoration: none;
+    color: #D4B996FF;
+    margin-left: 10vw;
+}
+
+.manage-books-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 2vh;
+}
+
+.manage-books-items-container{
+    background-color: #1A1919;
+    width: 80%;
+    border-radius: 15px;
+}

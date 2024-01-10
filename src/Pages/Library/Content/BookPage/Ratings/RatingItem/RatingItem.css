@@ -1,0 +1,30 @@
+.rating-item-container{
+    color: #FFF;
+    display: flex;
+    margin-top: 5vh;
+}
+
+.rating-item-container .rating-user-icon h1{
+    font-size: 50px;
+}
+
+.rating-item-container .rating-info{
+    margin-left: 3.5vw;
+    word-wrap: break-word;
+    overflow: hidden;
+    padding-right: 2vw;
+}
+
+.rating-item-container .rating-options{
+    color: black;
+    font-size: 30px;
+    cursor: pointer;
+    position: absolute;
+    left: 92%;
+    margin-top: -2%;
+    transition: 0.2s;
+}
+
+.rating-item-container .rating-options:hover{
+    color: #FFF;
+}

@@ -1,3 +1,6 @@
+.wrapper{
+    width: 37%;
+}
 
 .wrapper .inputData{
     display: flex;
@@ -29,6 +32,10 @@
     width: 110%;
 }
 
+.wrapper .inputData input::placeholder{
+    margin-left: 5px;
+}
+
 .inputData input:focus ~ label,
 .inputData input:valid ~ label{
     transform: translateY(-20px);
@@ -41,11 +48,17 @@
     border-bottom-color: #DB630C;
 }
 .wrapper .inputData input[type=date]{
-    width:144%;
     color: #07080B;
 }
 
 .wrapper .inputData input[type=date]:focus,
 .wrapper .inputData input[type=date]:valid{
     color: #FFFF;
+}
+
+.errorS{
+    font-size: 14px;
+    color: red;
+    display: block;
+    margin-left: 1.5vw;
 }

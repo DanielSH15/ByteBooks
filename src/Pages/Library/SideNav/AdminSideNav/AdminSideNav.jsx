@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaBars, FaBook, FaPlus, FaStar, FaInfo, FaEdit } from 'react-icons/fa'
+import { FaBars, FaBook, FaPlus, FaStar, FaInfo, FaEdit, FaCheck } from 'react-icons/fa'
 import MenuItem from '../../MenuItem/MenuItem'
 import './AdminSideNav.css'
 
@@ -16,14 +16,10 @@ const AdminSideNav = ({changePage}) => {
             page: 'library',
         },
         {
-            name: "Recommendations",
-            icon: <FaStar />,
-            page: 'recommendations',
-        },
-        {
             name: "Add Book",
             icon: <FaPlus />,
-            page: 'addbook'
+            page: 'addbook',
+            path: '/addbook'
         },
         {
             name: "Statistics",
@@ -33,7 +29,14 @@ const AdminSideNav = ({changePage}) => {
         {
             name: "Manage Books",
             icon: <FaEdit />,
-            page: 'manage'
+            page: 'manage',
+            path: '/managebooks'
+        },
+        {
+            name: "Pending Applied Books",
+            icon: <FaCheck />,
+            page: 'pendingbooks',
+            path: '/pendingbooks'
         }
     ]
 
@@ -49,7 +52,7 @@ const AdminSideNav = ({changePage}) => {
             {
                 menuItems.map((item, i) => (
                     <div className='side-nav-menu-item' onClick={() => changePage(item.page)}>
-                       <MenuItem index={i} name={item.name} icon={item.icon} isOpen={isOpen}/>
+                       <MenuItem index={i} name={item.name} icon={item.icon} isOpen={isOpen} path={item.path}/>
                     </div>
                 ))
             }

@@ -1,0 +1,10 @@
+.pendingBooksContainer{
+    width: 70%;
+    height: 80%;
+    position: absolute;
+    left: 15%;
+    top: 15%;
+    border-radius: 10px;
+    border: none;
+    column-gap: 20px;
+}

@@ -3,6 +3,7 @@ import { Modal } from 'react-bootstrap'
 import './LoginModal.css'
 import Input from '../../Input/Input'
 import axios from 'axios'
+import LoginInput from './LoginInput/LoginInput'
 
 const LoginModal = ({show, onHide}) => {
     const [username, setUsername] = useState('')
@@ -18,6 +19,8 @@ const LoginModal = ({show, onHide}) => {
          }).then((response) => {
           console.log(response.data)
           sessionStorage.setItem("token", JSON.stringify(response.data))
+          sessionStorage.setItem("username", username)
+          sessionStorage.setItem("password", password)
           window.location = "/"
          })
       
@@ -39,13 +42,12 @@ const LoginModal = ({show, onHide}) => {
             </Modal.Header>
                 <Modal.Body>
                     <form className='loginInputs'>
-                        <Input type='text' label='Username' onChange={(e) => setUsername(e.target.value)}/>
-                        <Input type='text' label='Password' onChange={(e) => setPassword(e.target.value)}/>
+                        <LoginInput type='text' label='Username' onChange={(e) => setUsername(e.target.value)}/>
+                        <LoginInput type='text' label='Password' onChange={(e) => setPassword(e.target.value)}/>
                         <h5>Forgot Password?</h5>
                         <button onClick={handleSubmit}>Sign In</button>
                     </form>
-                    <div className='submitContainer'>
-                    </div>
+                    <h5 className='login-error-message'>{error}</h5>
                 </Modal.Body>
                 <Modal.Footer>
                   </Modal.Footer>

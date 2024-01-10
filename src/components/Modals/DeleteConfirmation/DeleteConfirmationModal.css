@@ -1,0 +1,47 @@
+.delete-book-button{
+    width: 15%;
+    height: 35%;
+    border-radius: 10px;
+    position:absolute;
+    top:60%;
+    right:60%;
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0;
+    background-color: white;
+    border: solid;
+    border-color: green;
+    color:green;
+    border-width: 1px;
+    transition: 0.2s;
+}
+
+.delete-book-button:hover{
+    background-color: green;
+    border-color: green;
+    color:white;
+}
+
+.cancel-button{
+    width: 15%;
+    height: 35%;
+    border-radius: 10px;
+    position:absolute;
+    top:60%;
+    right:80%;
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0;
+    background-color: white;
+    border: solid;
+    border-color: red;
+    color:red;
+    border-width: 1px;
+    transition: 0.2s;
+}
+
+.cancel-button:hover{
+    background-color: red;
+    border-color: red;
+    color:white;
+}

@@ -1,0 +1,67 @@
+.addbookM{
+    width: 15%;
+    height: 9%;
+    border-radius: 10px;
+    position:absolute;
+    top:90%;
+    right:60%;
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0;
+    background-color: white;
+    border: solid;
+    border-color: green;
+    color:green;
+    border-width: 1px;
+    transition: 0.2s;
+}
+
+.addbookM:hover{
+    background-color: green;
+    border-color: green;
+    color:white;
+}
+
+.canceladd{
+    width: 15%;
+    height: 9%;
+    border-radius: 10px;
+    position:absolute;
+    top:90%;
+    right:80%;
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0;
+    background-color: white;
+    border: solid;
+    border-color: red;
+    color:red;
+    border-width: 1px;
+    transition: 0.2s;
+}
+
+.canceladd:hover{
+    background-color: red;
+    border-color: red;
+    color:white;
+}
+
+.imageBook{
+    width:250px;
+    height:300px;
+    position: absolute;
+    left:59%;
+}
+
+.uploadImage{
+    position: absolute;
+    top: 75%;
+    left: 60%;
+    border: none;
+}
+
+.message{
+    position: absolute;
+    top: 80%;
+    right: 15%;
+}

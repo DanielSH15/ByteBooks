@@ -1,0 +1,65 @@
+.manage-book-item-container{
+    display: flex;
+    align-items: center;
+    height: 15vh;
+    background-color: #07080B;
+    margin: 10px;
+    border-radius: 15px;
+}
+
+.manage-book-item-container .manage-book-image-container{
+    height: 85%;
+    width: 100px;
+    margin: 10px;
+}
+
+.manage-book-item-container .manage-book-image-container img{
+    width:100%;
+    height: 100%;
+}
+
+.manage-book-item-container .manage-book-content-container{
+    height: 100%;
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
+
+.manage-book-item-container .manage-book-content-container h1{
+    color: #E13701;
+    font-size: 2.5em;
+    margin-left: 2vw;
+}
+
+.manage-book-item-container .manage-book-content-container .manage-book-actions-container{
+    font-size: 40px;
+    position: absolute;
+    right: 12%;
+}
+
+.manage-book-item-container .manage-book-content-container .manage-book-actions-container .manage-book-action-pencil{
+    color: #FFFFFF;
+    cursor: pointer;
+    margin-right: 1.5vw;
+    transition: 0.2s;
+}
+
+.manage-book-item-container .manage-book-content-container .manage-book-actions-container .manage-book-action-pencil:hover{
+    color: #00ff80;
+}
+
+.manage-book-item-container .manage-book-content-container .manage-book-actions-container .manage-book-action-trash{
+    color: #FF0000;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.manage-book-item-container .manage-book-content-container .manage-book-actions-container .manage-book-action-trash:hover{
+    color:#8a0000
+}
+
+@media screen and (max-width: 900px) {
+    .manage-book-item-container .manage-book-content-container h1{
+        font-size: 1em;
+    }
+  }

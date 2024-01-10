@@ -1,0 +1,9 @@
+.rows{
+    position: absolute;
+    left: 20%;
+    top:9%;
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

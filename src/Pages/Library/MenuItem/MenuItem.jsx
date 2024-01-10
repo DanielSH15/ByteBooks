@@ -11,7 +11,7 @@ const MenuItem = (props) => {
 
   return (
     <div>
-       <Link key={props.index} className='menu-item-container' onClick={props.onClick}>
+       <Link key={props.index} className='menu-item-container' onClick={props.do} to={props.path}>
         <div className="item-icon">{props.icon}</div>
         <div style={{display: props.isOpen ? "block" : "none"}}  className='item-text'>{props.name}</div>
        </Link>
