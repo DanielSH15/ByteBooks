@@ -18,7 +18,7 @@ const FindBook = () => {
     const searchBook = async(e) => {
         if(e.key === "Enter"){
             try{
-              await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${search}&key=AIzaSyD0K2pHHgCdecJ1iNZetQhOJbaHp5bpwhg` + `&maxResults=40`)
+              await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${search}&key=${import.meta.env.VITE_GOOGLE_API_KEY}` + `&maxResults=40`)
               .then((response) => {
                 setData(response.data.items)
               })
@@ -60,6 +60,7 @@ const FindBook = () => {
     }
 
     const CloseModal = () => setShow(false)
+
 
     return (
       <div>
