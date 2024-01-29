@@ -12,8 +12,8 @@ const BorrowBookInfo = ({show, onHide, message}) => {
             <Modal.Header closeButton>
                 <Modal.Title>Error</Modal.Title>
             </Modal.Header>
-                <Modal.Footer style={{textAlign: 'center'}}>
-                <div style={{width: '100%', textAlign:'center'}}><h3>{message}</h3></div>
+                <Modal.Footer style={{display: 'flex', justifyContent:'center'}}>
+                <div><h3>{message}</h3></div>
                 <br />
                 <br />
                   </Modal.Footer>

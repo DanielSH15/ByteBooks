@@ -3,6 +3,7 @@ import {FaUser} from 'react-icons/fa'
 import {HiDotsCircleHorizontal, HiDotsHorizontal} from 'react-icons/hi'
 import axios from 'axios'
 import './RatingItem.css'
+import OptionsDropDown from './OptionsDropDown/OptionsDropDown'
 
 const RatingItem = ({rating}) => {  
     const [user, setUser] = useState({})
@@ -20,7 +21,7 @@ const RatingItem = ({rating}) => {
 
     const GetOptions = () => {
         if(localStorage.getItem("userId") == user.userId){
-            return <HiDotsHorizontal className='rating-options'/>;
+            return <OptionsDropDown />;
         }
     }
 

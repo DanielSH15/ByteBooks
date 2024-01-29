@@ -66,13 +66,13 @@ const MultiSelectInput = (props) => {
         options={options}
         isMulti
         value={props.selectedOptions}
-        onChange={props.handleSelectChange}
+        onChange={props.onChange}
         styles={customStyles}
         placeholder='Select Favorite Genres'
         onBlur={handleFocus}
       />
       </div>
-      <span className='errorS'>{displayMessage}</span>
+      <span className='errorS'>{props.touched && props.error ? props.error : ''}</span>
     </div>
   )
 }

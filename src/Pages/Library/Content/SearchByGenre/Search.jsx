@@ -12,7 +12,7 @@ const Search = () => {
 
   useEffect(() => {
     try{
-      Axios.get('http://localhost:5226' + '/api/genre')
+      Axios.get(import.meta.env.VITE_BACKEND_URI + '/api/genre')
       .then((response) => {
           setGenres(response.data)
       }) 
@@ -26,7 +26,7 @@ const Search = () => {
       <Form.Control as='select' id = 'genres' onChange={e => {setGenre(e.target.value)}} className = 'select'>
         <option selected hidden value='Select genre'>Select genre</option>
             {genres?.map(genre => (
-                <option key={genre.genreId} value={genre.name}>{genre.name}</option>
+                <option key={genre.genreId} value={genre.value}>{genre.value}</option>
             ))}
     </Form.Control>
     <Result genre = {genre}/>

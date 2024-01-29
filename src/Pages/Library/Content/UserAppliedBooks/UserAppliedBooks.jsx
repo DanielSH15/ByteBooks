@@ -25,7 +25,8 @@ const UserAppliedBooks = () => {
         xmlhttp.onreadystatechange = () => {
           if(xmlhttp.readyState === 4){
               if(xmlhttp.status === 200){
-                setResponse(convert.xml2js(xmlhttp.responseText))
+                console.log(xmlhttp.responseText)
+                console.log(convert.xml2js(xmlhttp.responseText).elements[0].elements[0].elements[0].elements[0].elements)
                 setResponse(convert.xml2js(xmlhttp.responseText).elements[0].elements[0].elements[0].elements[0].elements)
               }
           }

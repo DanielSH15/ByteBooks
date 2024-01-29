@@ -5,13 +5,15 @@ import './BookPage.css'
 import axios from 'axios';
 import BorrowBookInfo from '../../../../components/Modals/BorrowBookAction/BorrowBookInfo';
 import Ratings from './Ratings/Ratings';
-import { FaArrowRight } from 'react-icons/fa';
+import PagesPerDay from '../../../../components/Modals/PagesPerDayModal/PagesPerDay';
 
 const BookPage = () => {
   const location = useLocation()
     const navigate = useNavigate()
     var {book} = location.state.book
     const[booksCounter, setBooksCounter] = useState(0)
+    const [pagesPerDay, setPagesPerDay] = useState(0)
+    const[pagesPerDayOpen, setPagesPerDayOpen] = useState(false)
     const[modalVisible, setModalVisible] = useState(false)
     const[error, setError] = useState("")
     const[listOfBooks, setListOfBooks] = useState([])
@@ -29,7 +31,7 @@ const BookPage = () => {
 
   const GetBookGenres = async() => {
     try{
-      await axios.get('http://localhost:5226/api/book/getgenresbyid/' + book.bookId)
+      await axios.get(import.meta.env.VITE_BACKEND_URI + '/api/book/getgenresbyid/' + book.bookId)
       .then((response) => {
         setBookGenres(response.data)
         console.log(response.data)
@@ -40,7 +42,7 @@ const BookPage = () => {
   }
   const GetBorrowedBooks = async() => {
     try{
-      await axios.get('http://localhost:5226/api/borrowedbooks/getbyuser/' + userId)
+      await axios.get(import.meta.env.VITE_BACKEND_URI + '/api/borrowedbooks/getbyuser/' + userId)
       .then((response) => {
         setBooksCounter(response.data.length)
         setListOfBooks(response.data)
@@ -51,8 +53,14 @@ const BookPage = () => {
 
   const BorrowedBook = {
     userId: userId,
-    bookId: bookId
+    bookId: bookId,
  }
+
+  const BorrowInsert = {
+    bb: BorrowedBook,
+    pagesPerDay: pagesPerDay
+  }
+
   
   const CheckIfBookExists = () => {
     for(var i = 0; i < listOfBooks.length; i++){
@@ -73,10 +81,11 @@ const BookPage = () => {
       setError("You already borrowed that book!")
       setModalVisible(true)
     } else {
-      await axios.post('http://localhost:5226/api/borrowedbooks', BorrowedBook)
+      await axios.post(import.meta.env.VITE_BACKEND_URI + '/api/borrowedbooks', BorrowInsert)
         .then((response) => {
         })
         navigate('/cart')
+        window.location.reload(false)
     }
  }
 
@@ -88,13 +97,23 @@ const BookPage = () => {
 
  const SendReview = async() => {
   try{
-    await axios.post('http://localhost:5226/api/rating', rating)
+    await axios.post(import.meta.env.VITE_BACKEND_URI + '/api/rating', rating)
     .then((response) => {
       console.log(response.data)
       window.location.reload(false)
     })
   } catch (e) {
     console.log(e.response.data)
+  }
+ }
+
+ const ButtonAction = () => {
+  if(localStorage.getItem("borrowTime") != "0" && book.copies > 0){
+    return <button onClick={() => setPagesPerDayOpen(true)}>Borrow</button>
+  } else if(book.copies <= 0){
+    return <button onClick={() => {setModalVisible(true); setError("No copies left.")}}>Borrow</button>
+  } else{
+    return <Link to='/readingtest' state={location.state.book}><button>Borrow</button></Link>
   }
  }
 
@@ -129,12 +148,14 @@ const BookPage = () => {
                  <a onClick={() => setIsReadMore(!readMore)} className='read-more-button'>{readMore ? 'Read Less' : 'Read More'}</a>
                </div>
                <div className='actions'>
-                   <button onClick={AddBorrowedBook}>Borrow</button>
+                
+                   {ButtonAction()}
                    <Link to='/library' style={{fontSize: '25px', color: '#DB630C'}}>Back To Library</Link>
                </div>
            </div>
         </div>
         <BorrowBookInfo show={modalVisible} onHide={() => setModalVisible(false)} message={error}/>
+        <PagesPerDay show={pagesPerDayOpen} onHide={() => setPagesPerDayOpen(false)} setPagesPerDay={setPagesPerDay} action = {AddBorrowedBook}/>
         <div className='ratings-container'>
           <div>
             <textarea className='review-input' placeholder='Write a review' onChange={(e) => setRatingMessage(e.target.value)}></textarea>

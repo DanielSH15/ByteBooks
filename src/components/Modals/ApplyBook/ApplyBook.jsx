@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import  Axios  from 'axios';
 import { Button, Col, Form, Modal, Row, Image } from 'react-bootstrap';
+import Select from 'react-select';
 import convert from 'xml-js';
+import BookInput from '../AddBook/Input/BookInput';
+
 
 const ApplyBook = ({show, onHide}) => {
     const [name, setName] = useState('')
-    const [genre, setGenre] = useState('')
+    const [selectedOptions, setSelectedOptions] = useState([])
     const [author, setAuthor] = useState('')
     const [description, setDescription] = useState('')
     const [releaseDate, setReleaseDate] = useState('')
@@ -14,13 +17,14 @@ const ApplyBook = ({show, onHide}) => {
     const[photofilename, setPhotoFileName] = useState('book.jpg')
     const [message, setMessage] = useState('')
     const [response, setResponse] = useState('')
-    var imagesrc = 'http://localhost:5226/Photos/' + photofilename
+
+    var imagesrc = import.meta.env.VITE_BACKEND_URI + '/Photos/' + photofilename
     var userId = localStorage.getItem("userId")
     var dummyBookId = 0
 
     const GetGenres = async () => {
         try{
-            await Axios.get('http://localhost:5226' + '/api/genre')
+            await Axios.get(import.meta.env.VITE_BACKEND_URI + '/api/genre')
             .then((response) => {
                 setGenres(response.data)
             }) 
@@ -28,25 +32,39 @@ const ApplyBook = ({show, onHide}) => {
             console.log(e.response.data)
         }
     }
+
+    const errorMessages = {
+        name: "Title should start with a big letter and shouldn't include special characters!",
+        notempty: "Should not be empty!"
+    }
+
+    const listXml = selectedOptions.map(obj => {
+      return `
+        <GenreViewModel>
+          <label>${obj.label}</label>
+          <value>${obj.value}</value>
+        </GenreViewModel>
+      `
+    }).join('');
    
 
     const HandleClick = () => {
         var xmlhttp = new XMLHttpRequest();
         
-        xmlhttp.open('POST', 'http://localhost:5226/Service.asmx', true)
+        xmlhttp.open('POST', import.meta.env.VITE_BACKEND_URI + '/Service.asmx', true)
         var sr = 
         '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">'
           + '<Body>'
             + '<Insert xmlns="http://tempuri.org/">'
-              + '<book>'
+              + '<model>'
                 +'<name>' + name + '</name>'
-                +'<genre>' + genre +'</genre>'
+                +'<genres>'+ listXml + '</genres>'
                 +'<author>' + author +'</author>'
                 +'<description>' + description +'</description>'
                 +'<releaseDate>' + releaseDate +'</releaseDate>'
                 +'<pages>' + pages +'</pages>'
                 +'<photoFileName>' + photofilename +'</photoFileName>'
-              +'</book>'
+              +'</model>'
               +'<pendingBook>'
                 +'<userId>' + userId +'</userId>'
                 +'<appliedBookId>' + dummyBookId +'</appliedBookId>'
@@ -86,40 +104,15 @@ const ApplyBook = ({show, onHide}) => {
                     <Row>
                         <Col>
                         <Form>
+                        <BookInput label="Name" type="text" placeholder="Name" action={e => {setName(e.target.value)}} id="name" regex={/^[A-Z][a-z]*$/} errorMessage={errorMessages.name}/>
                         <Form.Group>
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control type='text' placeholder='Name' name='bookname' required onChange={e => {setName(e.target.value)}}/>
+                            <Form.Label>Genres</Form.Label>
+                            <Select options={genres} isMulti value={selectedOptions} onChange={(selectedOptions) => setSelectedOptions(selectedOptions)}/>
                         </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>Genre</Form.Label>
-                            <Form.Control as='select' onChange={e => {setGenre(e.target.value)}}>
-                                <option selected hidden>Select Genre</option>
-                                {genres?.map(genre => (
-                                    <option key={genre.genreId}>{genre.name}</option>
-                                ))}
-                            </Form.Control>
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>Author</Form.Label>
-                            <Form.Control type='text' placeholder='Author' name='bookname' required onChange={e => {setAuthor(e.target.value)}}/>
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>Description</Form.Label>
-                            <Form.Control type='text' placeholder='Description' name='bookname' required onChange={e => {setDescription(e.target.value)}}/>
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>Release Date</Form.Label>
-                            <Form.Control type='date' placeholder='Release Date' name='bookname' required onChange={e => {setReleaseDate(e.target.value)}}/>
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>Pages</Form.Label>
-                            <Form.Control type='number' placeholder='Pages' name='bookname' required onChange={e => {setPages(e.target.value)}}/>
-                        </Form.Group>
+                        <BookInput label="Author" type="text" placeholder="Author" action={e => {setAuthor(e.target.value)}} id="author" regex={/^(?!\s*$).+/} errorMessage={errorMessages.notempty}/>
+                        <BookInput label="Description" type="text" placeholder="Description" action={e => {setDescription(e.target.value)}} id="description" regex={/^(?!\s*$).+/} errorMessage={errorMessages.notempty}/>
+                        <BookInput label="Release Date" type="date" placeholder="Release Date" action={e => {setReleaseDate(e.target.value)}} id="releaseDate" regex={/^(?!\s*$).+/} errorMessage={errorMessages.notempty}/>
+                        <BookInput label="Pages" type="number" placeholder="Pages" action={e => {setPages(e.target.value)}} id="pages" regex={/^(?!\s*$).+/} errorMessage={errorMessages.notempty}/>
                     </Form>
                         </Col>
                     

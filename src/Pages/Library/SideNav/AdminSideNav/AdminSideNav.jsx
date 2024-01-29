@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { FaBars, FaBook, FaPlus, FaStar, FaInfo, FaEdit, FaCheck } from 'react-icons/fa'
 import MenuItem from '../../MenuItem/MenuItem'
 import './AdminSideNav.css'
+import { HiCalendar } from 'react-icons/hi'
 
 
 const AdminSideNav = ({changePage}) => {
@@ -24,7 +25,8 @@ const AdminSideNav = ({changePage}) => {
         {
             name: "Statistics",
             icon: <FaInfo />,
-            page: 'stats'
+            page: 'stats',
+            path: '/statistics'
         },
         {
             name: "Manage Books",
@@ -37,6 +39,11 @@ const AdminSideNav = ({changePage}) => {
             icon: <FaCheck />,
             page: 'pendingbooks',
             path: '/pendingbooks'
+        },
+        {
+            name: "Overdue Books",
+            icon: <HiCalendar />,
+            path: '/overduebooks'
         }
     ]
 

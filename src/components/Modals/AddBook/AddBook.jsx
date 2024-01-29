@@ -4,6 +4,7 @@ import { Button, Col, Form, Modal, Row, Image } from 'react-bootstrap';
 import moment from 'moment/moment';
 import Select from 'react-select';
 import './AddBook.css'
+import BookInput from './Input/BookInput';
 
 const AddBook = ({show, onHide}) => {
     const [name, setName] = useState('')
@@ -16,11 +17,11 @@ const AddBook = ({show, onHide}) => {
     const[photofilename, setPhotoFileName] = useState('book.jpg')
     const [message, setMessage] = useState('')
 
-    var imagesrc = 'http://localhost:5226/Photos/' + photofilename
+    var imagesrc = import.meta.env.VITE_BACKEND_URI + '/Photos/' + photofilename
 
     const GetGenres = async () => {
         try{
-            await Axios.get('http://localhost:5226' + '/api/genre')
+            await Axios.get(import.meta.env.VITE_BACKEND_URI + '/api/genre')
             .then((response) => {
                 setGenres(response.data)
             }) 
@@ -39,7 +40,7 @@ const AddBook = ({show, onHide}) => {
         e.target.files[0].name
        )
 
-       fetch('http://localhost:5226/' + 'api/book/savefile', {
+       fetch(import.meta.env.VITE_BACKEND_URI + 'api/book/savefile', {
         method: 'POST',
         body: formData
        })
@@ -61,14 +62,19 @@ const AddBook = ({show, onHide}) => {
         description: description,
         releaseDate: releaseDate,
         pages: pages,
-        photoFileName: 'http://localhost:5226/Photos/' + photofilename,
+        photoFileName: import.meta.env.VITE_BACKEND_URI + '/Photos/' + photofilename,
+    }
+
+    const errorMessages = {
+        name: "Title should start with a big letter and shouldn't include special characters!",
+        notempty: "Should not be empty!"
     }
 
     const AddBook = async () => {
        var dateString = moment(releaseDate).format('YYYY-MM-DD')
        setReleaseDate(dateString)
        try{
-         await Axios.post('http://localhost:5226/api/book', insert)
+         await Axios.post(import.meta.env.VITE_BACKEND_URI + '/api/book', insert)
          .then((response) => {
             setMessage(response.data)
          })
@@ -79,6 +85,7 @@ const AddBook = ({show, onHide}) => {
 
     useEffect(() => {
         GetGenres()
+        console.log(name)
     }, [])
 
     return(
@@ -95,35 +102,16 @@ const AddBook = ({show, onHide}) => {
                     <Row>
                         <Col>
                         <Form>
+                        <BookInput label="Name" type="text" placeholder="Name" action={e => {setName(e.target.value)}} id="name" regex={/^[A-Z][a-z]*$/} errorMessage={errorMessages.name}/>
                         <Form.Group>
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control type='text' placeholder='Name' name='bookname' required onChange={e => {setName(e.target.value)}}/>
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>Genre</Form.Label>
+                            <Form.Label>Genres</Form.Label>
                             <Select options={genres} isMulti value={selectedOptions} onChange={(selectedOptions) => setSelectedOptions(selectedOptions)}/>
                         </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>Author</Form.Label>
-                            <Form.Control type='text' placeholder='Author' name='bookname' required onChange={e => {setAuthor(e.target.value)}}/>
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>Description</Form.Label>
-                            <Form.Control type='text' placeholder='Description' name='bookname' required onChange={e => {setDescription(e.target.value)}}/>
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>Release Date</Form.Label>
-                            <Form.Control type='date' placeholder='Release Date' name='bookname' required onChange={e => {setReleaseDate(e.target.value)}}/>
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>Pages</Form.Label>
-                            <Form.Control type='number' placeholder='Pages' name='bookname' required onChange={e => {setPages(e.target.value)}}/>
-                        </Form.Group>
+                        <BookInput label="Author" type="text" placeholder="Author" action={e => {setAuthor(e.target.value)}} id="author" regex={/^(?!\s*$).+/} errorMessage={errorMessages.notempty}/>
+                        <BookInput label="Description" type="text" placeholder="Description" action={e => {setDescription(e.target.value)}} id="description" regex={/^(?!\s*$).+/} errorMessage={errorMessages.notempty}/>
+                        <BookInput label="Release Date" type="date" placeholder="Release Date" action={e => {setReleaseDate(e.target.value)}} id="releaseDate" regex={/^(?!\s*$).+/} errorMessage={errorMessages.notempty}/>
+                        <BookInput label="Pages" type="number" placeholder="Pages" action={e => {setPages(e.target.value)}} id="pages" regex={/^(?!\s*$).+/} errorMessage={errorMessages.notempty}/>
+                        
                     </Form>
                         </Col>
                     

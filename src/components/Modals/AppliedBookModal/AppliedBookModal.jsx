@@ -4,12 +4,12 @@ import './AppliedBookModal.css'
 
 
 const AppliedBookModal = ({show, onHide, book}) => {
-  var imgsrc = 'http://localhost:5226/Photos/' + book.elements[7].elements[0].text
+  var imgsrc = import.meta.env.VITE_BACKEND_URI + '/Photos/' + book.elements[6].elements[0].text
 
   const HandleClickApprove = () => {
     var xmlhttp = new XMLHttpRequest();
   
-    xmlhttp.open('POST', 'http://localhost:5226/Service.asmx', true)
+    xmlhttp.open('POST', import.meta.env.VITE_BACKEND_URI + '/Service.asmx', true)
     var sr = 
     '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">'
       + '<Body>'
@@ -17,12 +17,11 @@ const AppliedBookModal = ({show, onHide, book}) => {
           + '<book>'
             + '<Id>' + book.elements[0].elements[0].text + '</Id>'
             +'<name>' + book.elements[1].elements[0].text + '</name>'
-            +'<genre>' + book.elements[2].elements[0].text +'</genre>'
-            +'<author>' + book.elements[3].elements[0].text +'</author>'
-            +'<description>' + book.elements[4].elements[0].text +'</description>'
-            +'<releaseDate>' + book.elements[5].elements[0].text +'</releaseDate>'
-            +'<pages>' + book.elements[6].elements[0].text +'</pages>'
-            +'<photoFileName>' + book.elements[7].elements[0].text +'</photoFileName>'
+            +'<author>' + book.elements[2].elements[0].text +'</author>'
+            +'<description>' + book.elements[3].elements[0].text +'</description>'
+            +'<releaseDate>' + book.elements[4].elements[0].text +'</releaseDate>'
+            +'<pages>' + book.elements[5].elements[0].text +'</pages>'
+            +'<photoFileName>' + book.elements[6].elements[0].text +'</photoFileName>'
           +'</book>'
         + '</Approve>'
       + '</Body>'
@@ -43,21 +42,12 @@ const AppliedBookModal = ({show, onHide, book}) => {
   const HandleClickDecline = () => {
     var xmlhttp = new XMLHttpRequest();
   
-    xmlhttp.open('POST', 'http://localhost:5226/Service.asmx', true)
+    xmlhttp.open('POST', import.meta.env.VITE_BACKEND_URI + '/Service.asmx', true)
     var sr = 
     '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">'
       + '<Body>'
         + '<Decline xmlns="http://tempuri.org/">'
-          + '<book>'
-            + '<Id>' + book.elements[0].elements[0].text + '</Id>'
-            +'<name>' + book.elements[1].elements[0].text + '</name>'
-            +'<genre>' + book.elements[2].elements[0].text +'</genre>'
-            +'<author>' + book.elements[3].elements[0].text +'</author>'
-            +'<description>' + book.elements[4].elements[0].text +'</description>'
-            +'<releaseDate>' + book.elements[5].elements[0].text +'</releaseDate>'
-            +'<pages>' + book.elements[6].elements[0].text +'</pages>'
-            +'<photoFileName>' + book.elements[7].elements[0].text +'</photoFileName>'
-          +'</book>'
+         + '<id>' + book.elements[0].elements[0].text + '</id>'
         + '</Decline>'
       + '</Body>'
     + '</Envelope>'     
@@ -81,11 +71,11 @@ const AppliedBookModal = ({show, onHide, book}) => {
         onHide={onHide}
         >
             <Modal.Header closeButton>
-                <Modal.Title>{book.elements[1].elements[0].text} by {book.elements[3].elements[0].text}</Modal.Title>
+                <Modal.Title>{book.elements[1].elements[0].text} by {book.elements[2].elements[0].text}</Modal.Title>
             </Modal.Header>
                 <Modal.Body style={{display: 'flex'}}>
                     <img src={imgsrc} style={{height:'450px', width:'220px'}}/>
-                    <h4 style={{marginLeft: '30px'}}>{book.elements[4].elements[0].text}</h4>
+                    <h4 style={{marginLeft: '30px'}}>{book.elements[3].elements[0].text}</h4>
                 </Modal.Body>
                 <Modal.Footer>
                 <Button className='addgenreAM' onClick={HandleClickApprove}>Approve</Button>

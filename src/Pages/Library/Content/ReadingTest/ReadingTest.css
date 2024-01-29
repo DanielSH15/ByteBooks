@@ -1,0 +1,26 @@
+.reading-test-content-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+}
+
+
+.image-container{
+    background-image: url('../../../../assets/trainingImage.PNG');
+    background-size: cover;
+    height: 70vh;
+    width: 40vw;
+}
+
+.explanation-info{
+    color: #FFF;
+    font-size: 35px;
+    cursor: pointer;
+    position: absolute;
+    left: 5%;
+    transition: 0.2s;
+}
+
+.explanation-info:hover{
+    color: rgb(72, 72, 240);
+}

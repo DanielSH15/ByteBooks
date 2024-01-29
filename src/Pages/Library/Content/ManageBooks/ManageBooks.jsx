@@ -10,7 +10,7 @@ const ManageBooks = () => {
 
     const GetBooks = async() => {
         try{
-            await axios.get("http://localhost:5226/api/book")
+            await axios.get(import.meta.env.VITE_BACKEND_URI + '/api/book')
             .then((response) => {
                 console.log(response.data.Value)
                 setBooks(response.data.Value)

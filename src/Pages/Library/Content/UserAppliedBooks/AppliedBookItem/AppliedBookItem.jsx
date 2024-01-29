@@ -5,10 +5,10 @@ import EditAppliedBookModal from '../../../../../components/Modals/EditAppliedBo
 import DeleteConfirmationModal from '../../../../../components/Modals/DeleteConfirmation/DeleteConfirmationModal'
 
 const AppliedBookItem = ({book}) => {
-  var imgsrc = 'http://localhost:5226/Photos/' + book.elements[7].elements[0].text
+  var imgsrc = 'http://localhost:5226/Photos/' + book.elements[6].elements[0].text
   const [modalOpened, setModalOpened] = useState(false)
   const [deleteModalOpened, setDeleteModalOpened] = useState(false)
-  const [id, setId] = useState(book.elements[0].elements[0].text)
+  const id = book.elements[0].elements[0].text
 
 
   const HandleClickDelete = () => {

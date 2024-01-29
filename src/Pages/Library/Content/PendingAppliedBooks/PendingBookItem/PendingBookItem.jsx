@@ -3,7 +3,7 @@ import AppliedBookModal from '../../../../../components/Modals/AppliedBookModal/
 import './PendingBookItem.css'
 
 const PendingBookItem = ({book}) => {
-    var imgsrc = 'http://localhost:5226/Photos/' + book.elements[7].elements[0].text
+    var imgsrc = 'http://localhost:5226/Photos/' + book.elements[6].elements[0].text
     const [modalOpened, setModalOpened] = useState(false)
     return (
       <div className='applied-item-container' style={{width: '100%', marginLeft: '0vh'}}>

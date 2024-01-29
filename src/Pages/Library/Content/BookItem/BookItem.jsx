@@ -17,13 +17,13 @@ const BookItem = ({book}) => {
   }
 
   const GetAccessKey = async () => {
-      await Axios.get("http://localhost:5226/" + "api/user/auth", config).then((response) =>{
+      await Axios.get(import.meta.env.VITE_BACKEND_URI + "/api/user/auth", config).then((response) =>{
           setAccessKey(response.data.accessKey)
       })
   }
 
    const DeleteBook = async () => {
-      await Axios.delete('http://localhost:5226' + `/api/book/${book.bookId}`)
+      await Axios.delete(import.meta.env.VITE_BACKEND_URI + `/api/book/${book.bookId}`)
       .then((response) => {
          console.log(response.data)
          window.location.reload()

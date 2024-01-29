@@ -6,7 +6,7 @@ const CustomBookInfo = ({show, book, onClose}) => {
     if(!show){
         return null
     }
-    let thumbnail = 'http://localhost:5226/Photos' + book.photoFileName
+    let thumbnail = import.meta.env.VITE_BACKEND_URI + '/Photos' + book.photoFileName
 
   return (
     <>

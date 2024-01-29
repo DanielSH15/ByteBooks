@@ -3,6 +3,7 @@ import { FaBars, FaBook, FaPlus, FaStar, FaInfo, FaEdit, FaSearch, FaBookOpen } 
 import MenuItem from '../../MenuItem/MenuItem'
 import './UserSideNav.css'
 import ApplyBook from '../../../../components/Modals/ApplyBook/ApplyBook'
+import { HiCalendar } from 'react-icons/hi'
 
 
 const UserSideNav = ({changePage}) => {
@@ -32,6 +33,11 @@ const UserSideNav = ({changePage}) => {
             icon: <FaBookOpen />,
             page: 'userappliedbooks',
             path: '/userappliedbooks'
+        },
+        {
+            name: "Overdue Books",
+            icon: <HiCalendar />,
+            path: '/overduebooks'
         }
     ]
 

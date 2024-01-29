@@ -1,0 +1,37 @@
+.actions-container{
+    width:100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.return-book-button{
+    background-color: white;
+    border: solid;
+    border-color: green;
+    color:green;
+    border-width: 1px;
+    margin-left: 0.5vw;
+}
+
+.return-book-button:hover{
+    background-color: green;
+    border-color: green;
+    color:white;
+}
+
+.read-more-button-action{
+    background-color: white;
+    border: solid;
+    border-color: red;
+    color:red;
+    border-width: 1px;
+    margin-right: 0.5vw;
+}
+
+.read-more-button-action:hover{
+    background-color: red;
+    border-color: red;
+    color:white;
+}

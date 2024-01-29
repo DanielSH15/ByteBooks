@@ -18,14 +18,14 @@ const SelectInput = (props) => {
     return (
       <div className='wrapperSelect'>
          <div className='inputDataSelect'>
-            <select onChange={props.onChange} defaultValue={props.defaultValue} onBlur = {handleFocus} focused={focused.toString()}>
+            <select onChange={props.onChange} defaultValue={props.defaultValue} onBlur = {handleFocus} focused={focused.toString()} id={props.id}>
             <option hidden>{props.hiddenoption}</option>
-              {props.options.map(option => (
-                  <option>{option}</option>
+              {props.options.map((option, i) => (
+                  <option key={i}>{option}</option>
               ))}
             </select>
          </div>
-         <span className='errorS'>{displayMessage}</span>
+         <span className='errorS'>{props.touched && props.error ? props.error : ''}</span>
       </div>
     )
 }

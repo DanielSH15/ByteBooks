@@ -13,7 +13,7 @@ const LoginModal = ({show, onHide}) => {
     const handleSubmit = async (e) =>{
         e.preventDefault()
         try{
-         await axios.post('http://localhost:5226/api/login', {
+         await axios.post(import.meta.env.VITE_BACKEND_URI + '/api/login', {
           username: username,
           password: password
          }).then((response) => {
@@ -43,7 +43,7 @@ const LoginModal = ({show, onHide}) => {
                 <Modal.Body>
                     <form className='loginInputs'>
                         <LoginInput type='text' label='Username' onChange={(e) => setUsername(e.target.value)}/>
-                        <LoginInput type='text' label='Password' onChange={(e) => setPassword(e.target.value)}/>
+                        <LoginInput type='password' label='Password' onChange={(e) => setPassword(e.target.value)}/>
                         <h5>Forgot Password?</h5>
                         <button onClick={handleSubmit}>Sign In</button>
                     </form>

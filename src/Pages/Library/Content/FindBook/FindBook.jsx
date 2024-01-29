@@ -23,7 +23,7 @@ const FindBook = () => {
                 setData(response.data.items)
               })
             } catch (e){
-              await axios.get('http://localhost:5226/api/foundbooks')
+              await axios.get(import.meta.env.VITE_BACKEND_URI + '/api/foundbooks')
               .then((response) => {
                 setIsLocal(true)
                 setData(response.data)

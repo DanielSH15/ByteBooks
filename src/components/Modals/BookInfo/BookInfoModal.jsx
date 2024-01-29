@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {HiX} from'react-icons/hi' 
 import './BookInfoModal.css'
 import axios from 'axios'
@@ -18,12 +18,13 @@ const BookInfoModal = ({show, book, onClose}) => {
       description: book.volumeInfo.description,
       releaseDate: book.volumeInfo.publishedDate,
       pages: book.volumeInfo.pageCount,
-      photoFileName: thumbnail
+      photoFileName: thumbnail,
+      previewLink: book.volumeInfo.previewLink
     }
 
     const AddBook = async() => {
       try{
-        await axios.post('http://localhost:5226/api/book', insert)
+        await axios.post(import.meta.env.VITE_BACKEND_URI + '/api/book', insert)
         .then((response) => {
           console.log(response.data)
         })

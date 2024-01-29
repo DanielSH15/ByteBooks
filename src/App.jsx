@@ -12,6 +12,11 @@ import PendingBooks from './Pages/Library/Content/PendingAppliedBooks/PendingBoo
 import BookPage from './Pages/Library/Content/BookPage/BookPage';
 import Cart from './Pages/Cart/Cart';
 import ManageBooks from './Pages/Library/Content/ManageBooks/ManageBooks';
+import Statistics from './Pages/Library/Content/Statistics/Statistics';
+import ReadingTest from './Pages/Library/Content/ReadingTest/ReadingTest';
+import DisplayNotification from './components/Notification/DisplayNotification';
+import OverdueBooks from './Pages/Library/Content/OverdueBooks/OverdueBooks';
+import OverdueNotification from './SignalR/OverdueNotification';
 
 function App() {
 
@@ -28,6 +33,9 @@ function App() {
         <Route path='/pendingbooks' element={<PendingBooks />}/>
         <Route path='/cart' element={<Cart />} />
         <Route path='/managebooks' element={<ManageBooks />}/>
+        <Route path='/statistics' element={<Statistics />} />
+        <Route path='/readingtest' element={<ReadingTest />}/>
+        <Route path='/overduebooks' element={<OverdueBooks />}/>
       </Routes>
     </BrowserRouter>
   )

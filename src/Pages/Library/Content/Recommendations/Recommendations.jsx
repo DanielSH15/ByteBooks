@@ -19,7 +19,7 @@ const Recommendations = () => {
     const paginate = pageNumber => setCurrentPage(pageNumber)
 
     useEffect(() => {
-        Axios.get("http://localhost:5226/api/user/getrecs/" + userId)
+        Axios.get(import.meta.env.VITE_BACKEND_URI + "/api/user/getrecs/" + userId)
         .then((response) => {
             setRecs(response.data)
         })

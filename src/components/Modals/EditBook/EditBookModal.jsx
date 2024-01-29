@@ -20,7 +20,7 @@ const EditBookModal = ({show, onHide, book}) => {
 
     const GetGenres = async () => {
         try{
-            await Axios.get('http://localhost:5226' + '/api/genre')
+            await Axios.get(import.meta.env.VITE_BACKEND_URI + '/api/genre')
             .then((response) => {
                 setGenres(response.data)
             }) 
@@ -31,7 +31,7 @@ const EditBookModal = ({show, onHide, book}) => {
 
     const GetCurrentGenres = async() => {
         try{
-            await Axios.get('http://localhost:5226/api/book/getgenresbyid/' + book.bookId)
+            await Axios.get(import.meta.env.VITE_BACKEND_URI + '/api/book/getgenresbyid/' + book.bookId)
             .then((response) => {
                 setSelectedOptions(response.data)
                 console.log(response.data)
@@ -54,7 +54,7 @@ const EditBookModal = ({show, onHide, book}) => {
 
     const handleClick = async() => {
         try{
-            await Axios.put('http://localhost:5226/api/book', update)
+            await Axios.put(import.meta.env.VITE_BACKEND_URI + '/api/book', update)
             .then((response) => {
                 console.log(response.data)
             })
@@ -77,7 +77,7 @@ const EditBookModal = ({show, onHide, book}) => {
         onHide={onHide}
         >
             <Modal.Header closeButton>
-                <Modal.Title>Add a new book</Modal.Title>
+                <Modal.Title>Edit book: {book.name}</Modal.Title>
             </Modal.Header>
                 <Modal.Body>
                     <Row>

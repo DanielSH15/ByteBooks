@@ -1,0 +1,25 @@
+.read-button-container{
+    width:100%;
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.read-notification-button{
+    background-color: white;
+    border: solid;
+    border-color: green;
+    color:green;
+    border-width: 1px;
+    transition: 0.2s;
+    border-radius: 10px;
+    width: 5vw;
+    height: 4vh;
+}
+
+.read-notification-button:hover{
+    background-color: green;
+    border-color: green;
+    color:white;
+}

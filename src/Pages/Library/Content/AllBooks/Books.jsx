@@ -15,7 +15,7 @@ const Books = () => {
   useEffect(() => {
     const getBooks = async() => {
       setLoading(true)
-      const res = await axios.get('http://localhost:5226/api/book')
+      const res = await axios.get(import.meta.env.VITE_BACKEND_URI + '/api/book')
       setData(res.data.Value)
       setLoading(false)
     }
@@ -30,7 +30,7 @@ const Books = () => {
   const paginate = pageNumber => setCurrentPage(pageNumber)
 
   return (
-    <div>
+    <div className='all-books-content-container'>
        <BookList books={currentBooks} />
        <Pagination booksPerPage={booksPerPage} totalBooks={data.length} paginate={paginate}/>
     </div>

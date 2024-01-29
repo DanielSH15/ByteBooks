@@ -25,12 +25,13 @@ const UserNavbar = () => {
 }
 
   const getUser = async() =>{
-    await axios.get("http://localhost:5226" + "/api/user/auth/", config).then((response) =>{
+    await axios.get(import.meta.env.VITE_BACKEND_URI + "/api/user/auth/", config).then((response) =>{
         setUsername(response.data.username)
         setAccessKey(response.data.accessKey)
         setUser(response.data)
         console.log(response.data)
         localStorage.setItem("userId", response.data.userId)
+        localStorage.setItem("borrowTime", response.data.borrowTime)
         sessionStorage.setItem("accessKey", response.data.accessKey)
     })
 }

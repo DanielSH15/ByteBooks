@@ -10,7 +10,8 @@ const PendingBooks = () => {
   const GetPendingBooks = async() => {
     var xmlhttp = new XMLHttpRequest();
         
-        xmlhttp.open('POST', 'http://localhost:5226/Service.asmx', true)
+        xmlhttp.open('POST', import.meta.env.VITE_BACKEND_URI + '/Service.asmx', true)
+        
         var sr = 
         '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">'
           + '<Body>'
@@ -23,8 +24,6 @@ const PendingBooks = () => {
           if(xmlhttp.readyState === 4){
               if(xmlhttp.status === 200){
                 console.log(xmlhttp.responseText)
-                setResponse(convert.xml2js(xmlhttp.responseText))
-                console.log(convert.xml2js(xmlhttp.responseText).elements[0].elements[0].elements[0].elements[0].elements)
                 setResponse(convert.xml2js(xmlhttp.responseText).elements[0].elements[0].elements[0].elements[0].elements)
               }
           }
@@ -40,7 +39,7 @@ const PendingBooks = () => {
   return (
     <div className='pendingBooksContainer'>
         {
-          response.map((value, i) => {
+          response?.map((value, i) => {
             return(
                 <PendingBookItem book={response[i]}/>
             )

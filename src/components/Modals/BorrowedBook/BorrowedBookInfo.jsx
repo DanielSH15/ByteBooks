@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
+import './BorrowedBookInfo.css'
 
 
 const BorrowedBookInfo = ({show, book, onHide}) => {
+    const[readMore, setIsReadMore] = useState(false)
     if(!show){
         return null
     }
@@ -17,7 +19,7 @@ const BorrowedBookInfo = ({show, book, onHide}) => {
 
     const HandleReturn = async() => {
        try{
-        await axios.delete('http://localhost:5226/api/borrowedbooks/' + book.bookId)
+        await axios.delete(import.meta.env.VITE_BACKEND_URI + '/api/borrowedbooks/' + book.bookId)
         .then((response) => {
             console.log(response.data)
         })
@@ -39,13 +41,16 @@ const BorrowedBookInfo = ({show, book, onHide}) => {
             </Modal.Header>
                 <Modal.Body style={{display: 'flex'}}>
                     <img src={thumbnail} style={{height:'450px', width:'220px'}}/>
-                    <h4 style={{marginLeft: '30px'}}>{book.description}</h4>
+                    <div style={{marginLeft: '30px'}}>
+                        <h4>{readMore ? book.description : `${book.description.slice(0, 445)} ...`}</h4>
+                        <a onClick={() => setIsReadMore(!readMore)} className='read-more-button'>{readMore ? 'Read Less' : 'Read More'}</a>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button className='addgenreAM' onClick={HandleReturn}>Return</Button>
-                <Button className='canceladdAM'>Read more</Button>
-                <br />
-                <br />
+                    <div className='actions-container'>
+                        <a href={book.previewLink} target='_blank'><Button className='read-more-button-action'>Read more</Button></a>
+                        <Button onClick={HandleReturn} className='return-book-button'>Return</Button>
+                    </div>
                   </Modal.Footer>
         </Modal>
   )

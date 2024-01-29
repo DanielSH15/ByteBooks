@@ -1,0 +1,15 @@
+.message-item-container{
+    cursor: pointer;
+    height: auto;
+    display: flex;
+    align-items: center;
+    height: 35px;
+}
+
+.message-item-container:hover{
+    background-color: rgb(61, 52, 52);
+}
+
+.message-item-container span{
+    margin-left: 5px;
+}

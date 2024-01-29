@@ -1,0 +1,42 @@
+.options-menu-container{
+    position: absolute;
+    left: 89%;
+    margin-top: -2%;
+    transition: 0.2s;
+}
+
+.options-menu{
+    background: #07080B;
+    width:100px;
+}
+
+.options-menu.active{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: 0.5s ease;
+}
+
+.options-menu.inactive{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: 0.3s ease;
+}
+
+.options-menu h4{
+    font-weight: 200;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.options-menu h4:hover{
+    background-color: #FFF;
+    color: black;
+}
+
+.dots-options{
+    margin-left: 60%;
+    font-size: 30px;
+    cursor: pointer;
+}

@@ -1,10 +1,12 @@
 .bellIconContainer{
-    width: 3vh;
-    height: 3vh;
-    background-image: url('../../../../assets/bellIcon.svg');
     background-size: cover;
     position: absolute;
     right: 6%;
     top: 3%;
+}
+
+.bell-icon{
     cursor: pointer;
+    font-size: 30px;
+    color: #FFF;
 }
