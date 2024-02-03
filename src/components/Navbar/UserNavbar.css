@@ -18,3 +18,8 @@
   }
 
   
+.search-book-container{
+  position: absolute;
+  left: 38%;
+  top: 3%;
+}

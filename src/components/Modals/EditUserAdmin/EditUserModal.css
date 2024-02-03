@@ -1,0 +1,42 @@
+.actions-edit-user-container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.edit-user-button{
+    width: 15%;
+    height: 9%;
+    border-radius: 10px;
+    background-color: white;
+    border: solid;
+    border-color: green;
+    color:green;
+    border-width: 1px;
+    transition: 0.2s;
+}
+
+.edit-user-button:hover{
+    background-color: green;
+    border-color: green;
+    color:white;
+}
+
+.cancel-edit-button{
+    width: 15%;
+    height: 9%;
+    border-radius: 10px;
+    background-color: white;
+    border: solid;
+    border-color: red;
+    color:red;
+    border-width: 1px;
+    transition: 0.2s;
+    margin-left:1.5vw;
+}
+
+.cancel-edit-button:hover{
+    background-color: red;
+    border-color: red;
+    color:white;
+}

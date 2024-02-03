@@ -1,25 +1,46 @@
 import React, { useState, useEffect } from 'react'
 import { Col, Form, Modal, Row, Image } from 'react-bootstrap';
+import { useFormik } from 'formik';
+import { bookSchema } from '../../../Validations/BookValidation';
 import Select from 'react-select';
 import convert from 'xml-js';
 import axios from 'axios';
 import './EditAppliedBookModal.css'
+import BookInput from '../AddBook/Input/BookInput';
+import BookMultiselectInput from '../AddBook/Input/BookMultiselectInput';
 
 
 const EditAppliedBookModal = ({show, onHide, book}) => {
-  var imgsrc = import.meta.env.VITE_BACKEND_URI + '/Photos/' + book.elements[6].elements[0].text
+  var imagesrc = book.elements[6].elements[0].text
   const [id, setId] = useState(book.elements[0].elements[0].text)
-  const [name, setName] = useState(book.elements[1].elements[0].text)
-  const [author, setAuthor] = useState(book.elements[2].elements[0].text)
-  const [description, setDescription] = useState(book.elements[3].elements[0].text)
-  const [releaseDate, setReleaseDate] = useState(book.elements[4].elements[0].text)
-  const [pages, setPages] = useState(book.elements[5].elements[0].text)
   const[genres, setGenres] = useState([])
   const[photofilename, setPhotoFileName] = useState(book.elements[6].elements[0].text)
   const[selectedOptions, setSelectedOptions] = useState([])
   const [message, setMessage] = useState('')
   
-  
+  const formik = useFormik({
+    initialValues: {
+        name: book.elements[1].elements[0].text,
+        genres: selectedOptions,
+        author: book.elements[2].elements[0].text,
+        description: book.elements[3].elements[0].text,
+        releaseDate: book.elements[4].elements[0].text,
+        pages: book.elements[5].elements[0].text,
+        photoFileName: book.elements[6].elements[0].text,
+        previewLink: ''
+    },
+    validationSchema: bookSchema,
+    onSubmit: async(values) => {
+        try{
+            HandleClickEdit()
+            setOpenModal(true)
+        } catch (e) {
+            setMessage(e.response.data);
+            setOpenModal(true);
+            console.log(e)
+        }
+    }
+})
 
   const listXml = selectedOptions.map(obj => {
     return `
@@ -39,13 +60,13 @@ const EditAppliedBookModal = ({show, onHide, book}) => {
       + '<Body>'
         + '<Update xmlns="http://tempuri.org/">'
           + '<model>'
-            +'<name>' + name + '</name>'
+            +'<name>' + formik.values.name + '</name>'
             +'<genres>' + listXml + '</genres>'
-            +'<author>' + author +'</author>'
-            +'<description>' + description +'</description>'
-            +'<releaseDate>' + releaseDate +'</releaseDate>'
-            +'<pages>' + pages +'</pages>'
-            +'<photoFileName>' + photofilename +'</photoFileName>'
+            +'<author>' + formik.values.author +'</author>'
+            +'<description>' + formik.values.description +'</description>'
+            +'<releaseDate>' + formik.values.releaseDate +'</releaseDate>'
+            +'<pages>' + formik.values.pages +'</pages>'
+            +'<photoFileName>' + import.meta.env.VITE_BACKEND_URI + '/Photos/' + photofilename +'</photoFileName>'
             +'<id>' + id + '</id>'
           +'</model>'
         + '</Update>'
@@ -106,6 +127,37 @@ const EditAppliedBookModal = ({show, onHide, book}) => {
     xmlhttp.send(sr);
   }
 
+  const handleSelectedGenres = (updatedGenres) => {
+    setSelectedOptions(updatedGenres)
+    formik.values.genres = updatedGenres
+}
+
+const handleFileSelected = (e) => {
+  e.preventDefault()
+  setPhotoFileName(import.meta.env.VITE_BACKEND_URI + '/Photos/' + e.target.files[0].name)
+  formik.values.photoFileName = import.meta.env.VITE_BACKEND_URI + '/Photos/' + e.target.files[0].name
+  const formData = new FormData()
+  formData.append(
+   "myFile",
+   e.target.files[0],
+   e.target.files[0].name
+  )
+
+  fetch(import.meta.env.VITE_BACKEND_URI + '/api/book/savefile', {
+   method: 'POST',
+   body: formData
+  })
+  .then(res => res.json())
+  .then((result) => {
+   imagesrc = result
+   setPhotoFileName(result)
+   console.log(imagesrc)
+  },
+  (error) => {
+   alert('Failed.')
+  })
+}
+
 
   useEffect(() => {
     GetGenres()
@@ -125,51 +177,35 @@ const EditAppliedBookModal = ({show, onHide, book}) => {
                     <Row>
                         <Col>
                         <Form>
-                        <Form.Group>
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control type='text' placeholder='Name' name='name' defaultValue={book.elements[1].elements[0].text} required onChange={e => {setName(e.target.value)}}/>
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>Genres</Form.Label>
-                            <Select options={genres} isMulti value={selectedOptions} onChange={(selectedOptions) => setSelectedOptions(selectedOptions)}/>
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>Author</Form.Label>
-                            <Form.Control type='text' placeholder='Author' name='author' defaultValue = {book.elements[2].elements[0].text} required onChange={e => {setAuthor(e.target.value)}}/>
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>Description</Form.Label>
-                            <Form.Control type='text' placeholder='Description' name='description' defaultValue = {book.elements[3].elements[0].text} required onChange={e => {setDescription(e.target.value)}}/>
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>Release Date</Form.Label>
-                            <Form.Control type='date' placeholder='Release Date' name='releaseDate' required defaultValue = {book.elements[4].elements[0].text} onChange={e => {setReleaseDate(e.target.value)}}/>
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>Pages</Form.Label>
-                            <Form.Control type='number' placeholder='Pages' name='pages' required defaultValue = {book.elements[5].elements[0].text} onChange={e => {setPages(e.target.value)}}/>
-                        </Form.Group>
+                        
+                        <BookInput label="Name" type="text" placeholder="Name" id="name" defaultValue={formik.values.name} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.name} error={formik.errors.name}/>
+                        <BookMultiselectInput options={genres} isMulti value={selectedOptions} onChange={handleSelectedGenres}
+                        onBlur={formik.handleBlur} touched={formik.touched.genres} error={formik.errors.genres}/>
+                        <BookInput label="Author" type="text" placeholder="Author"  id="author" defaultValue={formik.values.author} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.author} error={formik.errors.author}/>
+                        <BookInput label="Description" type="text" placeholder="Description" id="description" defaultValue={formik.values.description} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.description} error={formik.errors.description}/>
+                        <BookInput label="Release Date" type="date" placeholder="Release Date" id="releaseDate" defaultValue={formik.values.releaseDate} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.releaseDate} error={formik.errors.releaseDate}/>
+                        <BookInput label="Pages" type="number" placeholder="Pages" id="pages" defaultValue={formik.values.pages} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.pages} error={formik.errors.pages}/>
                     </Form>
                         </Col>
                     
                     <Col sm={6}>
-                        <Image className='imageBook' src={imgsrc}/>
-                        <input type="File" className='uploadImage'/>
+                        <Image className='imageBook' src={imagesrc}/>
+                        <input onChange={handleFileSelected} type="File" className='uploadImage'/>
                     </Col>
                     </Row>
                     
                 </Modal.Body>
                 <Modal.Footer>
-                <button className='addbookM' onClick={HandleClickEdit}>Edit</button>
-                <button className='canceladd' onClick={onHide}>Cancel</button>
+                <div className='actions-edit-container'>
+                  <button className='addbookM' onClick={HandleClickEdit}>Edit</button>
+                  <button className='canceladd' onClick={onHide}>Cancel</button>
+                </div>
                 <h2 style={{position: 'absolute', left: '2%'}}>{message}</h2>
-                <br />
-                <br />
                   </Modal.Footer>
         </Modal>
   )

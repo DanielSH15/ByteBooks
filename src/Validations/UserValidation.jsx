@@ -24,14 +24,17 @@ export const userSchema = yup.object().shape({
     .matches(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/, 'Password must contain at least one number and one special character')
     .required('Password is required'),
 
+    confirmPassword: yup.string().required('Passwords must match')
+    .oneOf([yup.ref('password'), null], 'Passwords must match'),
+
     phone: yup.string()
     .matches(/^(?:(?:(\+?972|\(\+?972\)|\+?\(972\))(?:\s|\.|-)?([1-9]\d?))|(0[23489]{1})|(0[57]{1}[0-9]))(?:\s|\.|-)?([^0\D]{1}\d{2}(?:\s|\.|-)?\d{4})$/, 'Invalid Israeli phone number')
     .required('Phone number is required'),
 
-    dateOfBirth: yup.string().required('Must choose your date of birth'),
+    dateOfBirth: yup.string().required('Must choose date of birth'),
 
-    genres: yup.array().min(1, 'Must choose your favorite genres'),
+    genres: yup.array().min(1, 'Must choose favorite genres'),
 
     gender:  yup.string()
-    .required('Choose your gender')
+    .required('Choose gender')
 })

@@ -5,7 +5,6 @@ const MessageContent = ({show, onHide, message}) => {
     var newMsg;
     if(Array.isArray(message)){
         newMsg = message.join(`\n`);
-        console.log(newMsg)
     } else {
         newMsg = message;
     }

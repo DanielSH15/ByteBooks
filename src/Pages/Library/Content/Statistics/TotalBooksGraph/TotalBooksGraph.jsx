@@ -34,7 +34,7 @@ const TotalBooksGraph = () => {
 
     const GetDataPoints = async() => {
         try{
-            await axios.get(import.meta.env.VITE_BACKEND_URI + '/api/book/getbookstats')
+            await axios.get(import.meta.env.VITE_BACKEND_URI + '/api/statistics/getallbooks')
             .then((response) => {
                 setDataPoints(response.data)
                 console.log(response.data)

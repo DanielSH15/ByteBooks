@@ -1,38 +1,54 @@
 import  Axios  from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, Modal, Row, Image } from 'react-bootstrap';
-import moment from 'moment/moment';
 import Select from 'react-select';
 import './AddBook.css'
 import BookInput from './Input/BookInput';
+import { GetGenres } from './Data/Data';
+import { useFormik } from 'formik';
+import { bookSchema } from '../../../Validations/BookValidation';
+import BookMultiselectInput from './Input/BookMultiselectInput';
+import { InsertBook } from './Data/Data';
+import MessageContent from '../MessageContent/MessageContent';
 
 const AddBook = ({show, onHide}) => {
-    const [name, setName] = useState('')
     const [selectedOptions, setSelectedOptions] = useState([])
-    const [author, setAuthor] = useState('')
-    const [description, setDescription] = useState('')
-    const [releaseDate, setReleaseDate] = useState('')
-    const [pages, setPages] = useState(0)
     const[genres, setGenres] = useState([])
     const[photofilename, setPhotoFileName] = useState('book.jpg')
     const [message, setMessage] = useState('')
+    const[openModal, setOpenModal] = useState(false)
+
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            genres: [],
+            author: '',
+            description: '',
+            releaseDate: '',
+            pages: '',
+            photoFileName: 'book.jpg',
+            previewLink: ''
+        },
+        validationSchema: bookSchema,
+        onSubmit: async(values) => {
+            try{
+                const response = await InsertBook(values);
+                setMessage(response)
+                setOpenModal(true);
+                console.log(response)
+            } catch (e) {
+                setMessage(e.response.data);
+                setOpenModal(true);
+                console.log(e)
+            }
+        }
+    })
 
     var imagesrc = import.meta.env.VITE_BACKEND_URI + '/Photos/' + photofilename
-
-    const GetGenres = async () => {
-        try{
-            await Axios.get(import.meta.env.VITE_BACKEND_URI + '/api/genre')
-            .then((response) => {
-                setGenres(response.data)
-            }) 
-        } catch (e){
-            console.log(e.response.data)
-        }
-    }
-
     const handleFileSelected = (e) => {
        e.preventDefault()
        setPhotoFileName(e.target.files[0].name)
+       formik.values.photoFileName = import.meta.env.VITE_BACKEND_URI + '/Photos/' + e.target.files[0].name
        const formData = new FormData()
        formData.append(
         "myFile",
@@ -40,7 +56,7 @@ const AddBook = ({show, onHide}) => {
         e.target.files[0].name
        )
 
-       fetch(import.meta.env.VITE_BACKEND_URI + 'api/book/savefile', {
+       fetch(import.meta.env.VITE_BACKEND_URI + '/api/book/savefile', {
         method: 'POST',
         body: formData
        })
@@ -55,37 +71,32 @@ const AddBook = ({show, onHide}) => {
        })
     }
 
-    const insert = {
-        name: name,
-        genres: selectedOptions,
-        author: author,
-        description: description,
-        releaseDate: releaseDate,
-        pages: pages,
-        photoFileName: import.meta.env.VITE_BACKEND_URI + '/Photos/' + photofilename,
+    const handleSelectedGenres = (updatedGenres) => {
+        setSelectedOptions(updatedGenres)
+        formik.values.genres = updatedGenres
     }
 
-    const errorMessages = {
-        name: "Title should start with a big letter and shouldn't include special characters!",
-        notempty: "Should not be empty!"
-    }
-
-    const AddBook = async () => {
-       var dateString = moment(releaseDate).format('YYYY-MM-DD')
-       setReleaseDate(dateString)
-       try{
-         await Axios.post(import.meta.env.VITE_BACKEND_URI + '/api/book', insert)
-         .then((response) => {
-            setMessage(response.data)
-         })
-       } catch (e){
-         setMessage(e.response.data)
-       }
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        if(formik.values.photoFileName === ""){
+            formik.values.photoFileName = import.meta.env.VITE_BACKEND_URI + '/Photos/book.jpg'
+        }
+        formik.values.previewLink = "previewLink"
+        formik.handleSubmit();
+        console.log(formik.values)
     }
 
     useEffect(() => {
-        GetGenres()
-        console.log(name)
+        const GetSelectGenres = async() => {
+            try{
+              var genres = await GetGenres()
+              setGenres(genres)
+              console.log(genres)
+            } catch (e){
+              console.log(e)
+            }
+          }
+          GetSelectGenres()
     }, [])
 
     return(
@@ -102,15 +113,18 @@ const AddBook = ({show, onHide}) => {
                     <Row>
                         <Col>
                         <Form>
-                        <BookInput label="Name" type="text" placeholder="Name" action={e => {setName(e.target.value)}} id="name" regex={/^[A-Z][a-z]*$/} errorMessage={errorMessages.name}/>
-                        <Form.Group>
-                            <Form.Label>Genres</Form.Label>
-                            <Select options={genres} isMulti value={selectedOptions} onChange={(selectedOptions) => setSelectedOptions(selectedOptions)}/>
-                        </Form.Group>
-                        <BookInput label="Author" type="text" placeholder="Author" action={e => {setAuthor(e.target.value)}} id="author" regex={/^(?!\s*$).+/} errorMessage={errorMessages.notempty}/>
-                        <BookInput label="Description" type="text" placeholder="Description" action={e => {setDescription(e.target.value)}} id="description" regex={/^(?!\s*$).+/} errorMessage={errorMessages.notempty}/>
-                        <BookInput label="Release Date" type="date" placeholder="Release Date" action={e => {setReleaseDate(e.target.value)}} id="releaseDate" regex={/^(?!\s*$).+/} errorMessage={errorMessages.notempty}/>
-                        <BookInput label="Pages" type="number" placeholder="Pages" action={e => {setPages(e.target.value)}} id="pages" regex={/^(?!\s*$).+/} errorMessage={errorMessages.notempty}/>
+                        <BookInput label="Name" type="text" placeholder="Name" id="name" defaultValue={formik.values.name} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.name} error={formik.errors.name}/>
+                        <BookMultiselectInput options={genres} isMulti value={selectedOptions} onChange={handleSelectedGenres}
+                        onBlur={formik.handleBlur} touched={formik.touched.genres} error={formik.errors.genres}/>
+                        <BookInput label="Author" type="text" placeholder="Author"  id="author" defaultValue={formik.values.author} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.author} error={formik.errors.author}/>
+                        <BookInput label="Description" type="text" placeholder="Description" id="description" defaultValue={formik.values.description} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.description} error={formik.errors.description}/>
+                        <BookInput label="Release Date" type="date" placeholder="Release Date" id="releaseDate" defaultValue={formik.values.releaseDate} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.releaseDate} error={formik.errors.releaseDate}/>
+                        <BookInput label="Pages" type="number" placeholder="Pages" id="pages" defaultValue={formik.values.pages} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.pages} error={formik.errors.pages}/>
                         
                     </Form>
                         </Col>
@@ -123,12 +137,12 @@ const AddBook = ({show, onHide}) => {
                     
                 </Modal.Body>
                 <Modal.Footer>
-                <Button className='addbookM' onClick={AddBook}>Add</Button>
-                <Button className='canceladd' onClick={onHide}>Cancel</Button>
-                <h1>{message}</h1>
-                <br />
-                <br />
+                <div className='actions-edit-container'>
+                    <Button className='addbookM' onClick={handleSubmit}>Add</Button>
+                    <Button className='canceladd' onClick={onHide}>Cancel</Button>
+                </div>
                   </Modal.Footer>
+                  <MessageContent show={openModal} onHide={() => setOpenModal(false)} message={message}/>
         </Modal>
     )
 }

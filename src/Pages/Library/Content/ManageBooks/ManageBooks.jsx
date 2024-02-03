@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom'
 
 const ManageBooks = () => {
     const [books, setBooks] = useState([])
+    const[searchTerm, setSearchTerm] = useState('')
 
 
     const GetBooks = async() => {
@@ -20,23 +21,32 @@ const ManageBooks = () => {
         }
     }
 
+    const filteredBooks = books.filter(book => book.name.toLowerCase().includes(searchTerm.toLowerCase()));
+
     useEffect(() => {
         GetBooks()
     }, [])
 
   return (
     <div className='overall-manage-books-container'>
-        <Link to='/library' style={{textDecoration: 'none'}}><h1>Back To Library</h1></Link>
+        <div className='actions-manage-container'>
+            <input placeholder='Search...' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
+            <Link to='/library' style={{textDecoration: 'none'}}><h1>Back To Library</h1></Link>
+        </div>
         <div className='manage-books-container'>
-            <div className='manage-books-items-container'>
+            {searchTerm && filteredBooks.length === 0 ? (
+                <h3 style={{color: '#FFF'}}>No matching books found.</h3>
+            ) : (
+                <div className='manage-books-items-container'>
                 {
-                    books.map((value, i) => {
+                    filteredBooks.map((value, i) => {
                         return(
                             <BookItem book={value} key={i}/>
                         )
                     })
                  }
-            </div>
+                </div>
+            )}
         </div>
     </div>
   )

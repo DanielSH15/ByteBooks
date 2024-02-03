@@ -20,9 +20,13 @@ const SelectInput = (props) => {
          <div className='inputDataSelect'>
             <select onChange={props.onChange} defaultValue={props.defaultValue} onBlur = {handleFocus} focused={focused.toString()} id={props.id}>
             <option hidden>{props.hiddenoption}</option>
-              {props.options.map((option, i) => (
-                  <option key={i}>{option}</option>
-              ))}
+              {props.options.map((option, i) => {
+                  if(option === props.defaultValue){
+                    return <option key={i} selected>{option}</option> 
+                  } else {
+                    return <option key={i}>{option}</option> 
+                  }
+              })}
             </select>
          </div>
          <span className='errorS'>{props.touched && props.error ? props.error : ''}</span>

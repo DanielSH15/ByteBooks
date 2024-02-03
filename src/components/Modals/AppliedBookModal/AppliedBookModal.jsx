@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Modal } from 'react-bootstrap';
 import './AppliedBookModal.css'
 
 
 const AppliedBookModal = ({show, onHide, book}) => {
-  var imgsrc = import.meta.env.VITE_BACKEND_URI + '/Photos/' + book.elements[6].elements[0].text
+  var imgsrc = book.elements[6].elements[0].text
 
   const HandleClickApprove = () => {
     var xmlhttp = new XMLHttpRequest();
@@ -14,15 +14,7 @@ const AppliedBookModal = ({show, onHide, book}) => {
     '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">'
       + '<Body>'
         + '<Approve xmlns="http://tempuri.org/">'
-          + '<book>'
-            + '<Id>' + book.elements[0].elements[0].text + '</Id>'
-            +'<name>' + book.elements[1].elements[0].text + '</name>'
-            +'<author>' + book.elements[2].elements[0].text +'</author>'
-            +'<description>' + book.elements[3].elements[0].text +'</description>'
-            +'<releaseDate>' + book.elements[4].elements[0].text +'</releaseDate>'
-            +'<pages>' + book.elements[5].elements[0].text +'</pages>'
-            +'<photoFileName>' + book.elements[6].elements[0].text +'</photoFileName>'
-          +'</book>'
+          + '<id>' + book.elements[0].elements[0].text + '</id>'
         + '</Approve>'
       + '</Body>'
     + '</Envelope>'     
@@ -63,6 +55,7 @@ const AppliedBookModal = ({show, onHide, book}) => {
     xmlhttp.send(sr);
     
   }
+
   return (
     <Modal
         size='lg'
@@ -74,7 +67,7 @@ const AppliedBookModal = ({show, onHide, book}) => {
                 <Modal.Title>{book.elements[1].elements[0].text} by {book.elements[2].elements[0].text}</Modal.Title>
             </Modal.Header>
                 <Modal.Body style={{display: 'flex'}}>
-                    <img src={imgsrc} style={{height:'450px', width:'220px'}}/>
+                    <img src={imgsrc} style={{height:'450px', width:'320px'}}/>
                     <h4 style={{marginLeft: '30px'}}>{book.elements[3].elements[0].text}</h4>
                 </Modal.Body>
                 <Modal.Footer>

@@ -6,6 +6,8 @@ import axios from 'axios';
 import BorrowBookInfo from '../../../../components/Modals/BorrowBookAction/BorrowBookInfo';
 import Ratings from './Ratings/Ratings';
 import PagesPerDay from '../../../../components/Modals/PagesPerDayModal/PagesPerDay';
+import MessageContent from '../../../../components/Modals/MessageContent/MessageContent';
+import { IsBanned } from './Data/Data';
 
 const BookPage = () => {
   const location = useLocation()
@@ -20,6 +22,9 @@ const BookPage = () => {
     const[ratingMessage, setRatingMessage] = useState('')
     const [bookGenres, setBookGenres] = useState([])
     const[readMore, setIsReadMore] = useState(false)
+    const[ratingResult, setRatingResult] = useState('')
+    const[messageModalOpen, setMessageModalOpen] = useState(false)
+    const[isBanned, setIsBanned] = useState(false)
     const maxChars = 445;
     var imgsrc =  book.photoFileName
   
@@ -100,26 +105,43 @@ const BookPage = () => {
     await axios.post(import.meta.env.VITE_BACKEND_URI + '/api/rating', rating)
     .then((response) => {
       console.log(response.data)
-      window.location.reload(false)
+      setRatingMessage(response.data)
+      setMessageModalOpen(true)
     })
   } catch (e) {
     console.log(e.response.data)
+    setRatingMessage(e.response.data)
+    setMessageModalOpen(true)
   }
  }
 
  const ButtonAction = () => {
-  if(localStorage.getItem("borrowTime") != "0" && book.copies > 0){
-    return <button onClick={() => setPagesPerDayOpen(true)}>Borrow</button>
-  } else if(book.copies <= 0){
-    return <button onClick={() => {setModalVisible(true); setError("No copies left.")}}>Borrow</button>
-  } else{
-    return <Link to='/readingtest' state={location.state.book}><button>Borrow</button></Link>
+  if(isBanned === false){
+    if(localStorage.getItem("borrowTime") != "0" && book.copies > "0"){
+      return <button onClick={() => setPagesPerDayOpen(true)}>Borrow</button>
+    } else if(book.copies <= "0"){
+      return <button onClick={() => {setModalVisible(true); setError("No copies left.")}}>Borrow</button>
+    } else if(localStorage.getItem("borrowTime") === "0"){
+      return <Link to='/readingtest' state={location.state.book}><button>Borrow</button></Link>
+    }
+  } else {
+    return <button onClick={() => {setModalVisible(true); setError("You are banned from borrowing books.")}}>Borrow</button>
   }
  }
 
  useEffect(() => {
+  const CheckIsBanned = async() => {
+    try{
+      const res = await IsBanned(JSON.parse(localStorage.getItem("userId")))
+      setIsBanned(res)
+    } catch (e) {
+      console.log(e)
+    }
+   }
+
   GetBorrowedBooks()
   GetBookGenres()
+  CheckIsBanned()
 }, [""])
   return (
     <div className='book-page-container'>
@@ -148,7 +170,6 @@ const BookPage = () => {
                  <a onClick={() => setIsReadMore(!readMore)} className='read-more-button'>{readMore ? 'Read Less' : 'Read More'}</a>
                </div>
                <div className='actions'>
-                
                    {ButtonAction()}
                    <Link to='/library' style={{fontSize: '25px', color: '#DB630C'}}>Back To Library</Link>
                </div>
@@ -168,6 +189,7 @@ const BookPage = () => {
             </div>
           </div>
         </div>
+        <MessageContent show={messageModalOpen} onHide={() => setMessageModalOpen(false)} message={ratingMessage}/>
     </div>
   )
 }

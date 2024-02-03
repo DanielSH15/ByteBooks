@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
 import DropDownItem from './DropDownItem/DropDownItem'
-import {HiOutlineUser, HiPencil, HiLogout, HiShoppingCart, HiUser} from 'react-icons/hi'
+import {HiOutlineUser, HiPencil, HiLogout, HiShoppingCart, HiUser, HiBookOpen} from 'react-icons/hi'
 import {FaUser, FaUserCircle} from 'react-icons/fa'
 import {GrUserSettings} from 'react-icons/gr'
 import { useNavigate } from 'react-router-dom'
 import './DropDownMenu.css'
 import RegistrationModal from '../../../Modals/Registration/RegistrationModal'
+import UpdateProfileModal from '../../../Modals/UpdateProfile/UpdateProfileModal'
 
 const DropDownMenu = (props) => {
   const[open, setOpen] = useState(false)
@@ -34,9 +35,9 @@ const DropDownMenu = (props) => {
         <div className={`dropdownMenu ${open? 'active' : 'inactive'}`}>
           <h3>{props.username}<br /> <span>User</span></h3>
           <DropDownItem icon = {<HiPencil />} text = "Profile" do = {() => {handleProfileClick()}}/>
-          <DropDownItem icon = {<HiShoppingCart />} text = "Cart" location = "/cart" do = {() => {setOpen(false)}}/>
+          <DropDownItem icon = {<HiBookOpen />} text = "Your books" location = "/cart" do = {() => {setOpen(false)}}/>
           <DropDownItem icon = {<HiLogout />} text = "Logout" location = "/" do = {logout}/>
-          <RegistrationModal show={openProfileModal} onHide={() => setOpenProfileModal(false)} user={props.user}/>
+          <UpdateProfileModal show={openProfileModal} onHide={() => setOpenProfileModal(false)} user={props.user}/>
         </div>
       </div>
     )
@@ -49,9 +50,9 @@ const DropDownMenu = (props) => {
         <div className={`dropdownMenu ${open? 'active' : 'inactive'}`}>
           <h3>{props.username}<br /> <span>Moderator</span></h3>
           <DropDownItem icon = {<HiPencil />} text = "Profile" do = {() => {handleProfileClick()}}/>
-          <DropDownItem icon = {<HiShoppingCart />} text = "Cart" location = "/cart" do = {() => {setOpen(false)}}/>
+          <DropDownItem icon = {<HiBookOpen />} text = "Your books" location = "/cart" do = {() => {setOpen(false)}}/>
           <DropDownItem icon = {<HiLogout />} text = "Logout" location = "/" do = {logout}/>
-          <RegistrationModal show={openProfileModal} onHide={() => setOpenProfileModal(false)} user={props.user}/>
+          <UpdateProfileModal show={openProfileModal} onHide={() => setOpenProfileModal(false)} user={props.user}/>
         </div>
       </div>
     )
@@ -64,10 +65,10 @@ const DropDownMenu = (props) => {
         <div className={`dropdownMenu ${open? 'active' : 'inactive'}`}>
           <h3>{props.username}<br /> <span>Admin</span></h3>
           <DropDownItem icon = {<HiPencil />} text = "Profile" do = {() => {handleProfileClick()}}/>
-          <DropDownItem icon = {<HiShoppingCart />} text = "Cart" location = "/cart" do = {() => {setOpen(false)}}/>
+          <DropDownItem icon = {<HiBookOpen />} text = "Your books" location = "/cart" do = {() => {setOpen(false)}}/>
           <DropDownItem icon = {<GrUserSettings />} text = "Admin" location = "/usermanagement" do = {() => {setOpen(false)}}/>
           <DropDownItem icon = {<HiLogout />} text = "Logout" location = "/" do = {logout}/>
-          <RegistrationModal show={openProfileModal} onHide={() => setOpenProfileModal(false)} user={props.user}/>
+          <UpdateProfileModal show={openProfileModal} onHide={() => setOpenProfileModal(false)} user={props.user}/>
         </div>
       </div>
     )

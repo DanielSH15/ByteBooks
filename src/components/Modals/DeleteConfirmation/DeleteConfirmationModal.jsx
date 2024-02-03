@@ -19,7 +19,7 @@ const DeleteConfirmationModal = ({show, onHide, onDelete}) => {
                 <br />
                 <br />
                   </Modal.Footer>
-        </Modal>
+    </Modal>
   )
 }
 

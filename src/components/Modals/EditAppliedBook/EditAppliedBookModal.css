@@ -1,13 +1,7 @@
 .addgenreAM{
     width: 15%;
-    height: 40px;
+    height: 60px;
     border-radius: 10px;
-    position:absolute;
-    top:92%;
-    right:30%;
-    display: inline-block;
-    margin: 0 auto;
-    padding: 0;
     background-color: white;
     border: solid;
     border-color: green;
@@ -23,14 +17,8 @@
 
 .canceladdAM{
     width: 15%;
-    height: 40px;
+    height: 60px;
     border-radius: 10px;
-    position:absolute;
-    top:92%;
-    right:50%;
-    display: inline-block;
-    margin: 0 auto;
-    padding: 0;
     background-color: white;
     border: solid;
     border-color: red;

@@ -20,8 +20,10 @@ const RatingItem = ({rating}) => {
     }
 
     const GetOptions = () => {
-        if(localStorage.getItem("userId") == user.userId){
-            return <OptionsDropDown />;
+        if(sessionStorage.getItem("accessKey") === "10" || sessionStorage.getItem("accessKey") === "5"){
+            return <OptionsDropDown rating={rating}/>;
+        } else if(localStorage.getItem("userId") == user.userId){
+            return <OptionsDropDown rating={rating}/>;
         }
     }
 

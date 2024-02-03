@@ -27,7 +27,7 @@ const Messages = ({open}) => {
 
     useEffect(() => {
         GetMessages()
-    }, [])
+    })
 
     const CheckData = () => {
         if(messages.length > 0){

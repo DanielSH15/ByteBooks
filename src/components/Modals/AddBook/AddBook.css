@@ -2,12 +2,6 @@
     width: 15%;
     height: 9%;
     border-radius: 10px;
-    position:absolute;
-    top:90%;
-    right:60%;
-    display: inline-block;
-    margin: 0 auto;
-    padding: 0;
     background-color: white;
     border: solid;
     border-color: green;
@@ -26,18 +20,13 @@
     width: 15%;
     height: 9%;
     border-radius: 10px;
-    position:absolute;
-    top:90%;
-    right:80%;
-    display: inline-block;
-    margin: 0 auto;
-    padding: 0;
     background-color: white;
     border: solid;
     border-color: red;
     color:red;
     border-width: 1px;
     transition: 0.2s;
+    margin-left:1.5vw;
 }
 
 .canceladd:hover{
@@ -64,4 +53,10 @@
     position: absolute;
     top: 80%;
     right: 15%;
+}
+
+.actions-edit-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
 }

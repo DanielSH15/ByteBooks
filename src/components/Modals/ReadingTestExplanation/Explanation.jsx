@@ -25,8 +25,6 @@ const Explanation = ({show, onHide, setPagesPerDay}) => {
                     Before proceeding, you need to tell how many pages you are planning
                     to read each day. Leaving the field empty will give you the default time for borrowing (test results + 2 weeks).
                 </h5>
-                <Form.Control placeholder="Pages" type="number" style={{marginTop: '3vh'}} onChange={(e) => setPagesPerDay(e.target.value)}/>
-                <button className="submit-pages-button">Submit</button>
             </Modal.Body>
                 <Modal.Footer>
                 <button onClick={onHide} className="close-explanation-button">Close</button>

@@ -24,7 +24,8 @@ const ManagerSideNav = ({changePage}) => {
         {
             name: "Manage Books",
             icon: <FaEdit />,
-            page: 'manage'
+            page: 'manage',
+            path: '/managebooks'
         },
         {
             name: "Pending Applied Books",

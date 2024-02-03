@@ -19,3 +19,15 @@
     width: 80%;
     border-radius: 15px;
 }
+
+.actions-manage-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width:100%;
+}
+
+.actions-manage-container input{
+    width: 30%;
+    margin-left: 38%;
+}

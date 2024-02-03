@@ -1,42 +1,52 @@
 import React, { useState, useEffect } from 'react'
 import  Axios  from 'axios';
 import { Button, Col, Form, Modal, Row, Image } from 'react-bootstrap';
-import Select from 'react-select';
+import { useFormik } from 'formik';
+import { bookSchema } from '../../../Validations/BookValidation';
 import convert from 'xml-js';
 import BookInput from '../AddBook/Input/BookInput';
+import { GetGenres } from './Data/Data';
+import BookMultiselectInput from '../AddBook/Input/BookMultiselectInput';
+import MessageContent from '../MessageContent/MessageContent';
 
 
 const ApplyBook = ({show, onHide}) => {
-    const [name, setName] = useState('')
-    const [selectedOptions, setSelectedOptions] = useState([])
-    const [author, setAuthor] = useState('')
-    const [description, setDescription] = useState('')
-    const [releaseDate, setReleaseDate] = useState('')
-    const [pages, setPages] = useState(0)
-    const[genres, setGenres] = useState([])
-    const[photofilename, setPhotoFileName] = useState('book.jpg')
-    const [message, setMessage] = useState('')
-    const [response, setResponse] = useState('')
+  const [selectedOptions, setSelectedOptions] = useState([])
+  const[genres, setGenres] = useState([])
+  const[photofilename, setPhotoFileName] = useState('book.jpg')
+  const [message, setMessage] = useState('')
+  const[response, setResponse] = useState('')
+  var userId = JSON.parse(localStorage.getItem("userId"))
+  var dummyBookId = 0
+  const[openModal, setOpenModal] = useState(false)
+
+  const formik = useFormik({
+    initialValues: {
+        name: '',
+        genres: [],
+        author: '',
+        description: '',
+        releaseDate: '',
+        pages: '',
+        photoFileName: 'book.jpg',
+        previewLink: ''
+    },
+    validationSchema: bookSchema,
+    onSubmit: async(values) => {
+        try{
+            HandleClick()
+            setOpenModal(true)
+        } catch (e) {
+            setMessage(e.response.data);
+            setOpenModal(true);
+            console.log(e)
+        }
+    }
+})
 
     var imagesrc = import.meta.env.VITE_BACKEND_URI + '/Photos/' + photofilename
     var userId = localStorage.getItem("userId")
     var dummyBookId = 0
-
-    const GetGenres = async () => {
-        try{
-            await Axios.get(import.meta.env.VITE_BACKEND_URI + '/api/genre')
-            .then((response) => {
-                setGenres(response.data)
-            }) 
-        } catch (e){
-            console.log(e.response.data)
-        }
-    }
-
-    const errorMessages = {
-        name: "Title should start with a big letter and shouldn't include special characters!",
-        notempty: "Should not be empty!"
-    }
 
     const listXml = selectedOptions.map(obj => {
       return `
@@ -46,6 +56,32 @@ const ApplyBook = ({show, onHide}) => {
         </GenreViewModel>
       `
     }).join('');
+
+    const handleFileSelected = (e) => {
+      e.preventDefault()
+      setPhotoFileName(e.target.files[0].name)
+      formik.values.photoFileName = e.target.files[0].name
+      const formData = new FormData()
+      formData.append(
+       "myFile",
+       e.target.files[0],
+       e.target.files[0].name
+      )
+
+      fetch(import.meta.env.VITE_BACKEND_URI + '/api/book/savefile', {
+       method: 'POST',
+       body: formData
+      })
+      .then(res => res.json())
+      .then((result) => {
+       imagesrc = result
+       setPhotoFileName(result)
+       console.log(imagesrc)
+      },
+      (error) => {
+       alert('Failed.')
+      })
+   }
    
 
     const HandleClick = () => {
@@ -57,13 +93,13 @@ const ApplyBook = ({show, onHide}) => {
           + '<Body>'
             + '<Insert xmlns="http://tempuri.org/">'
               + '<model>'
-                +'<name>' + name + '</name>'
+                +'<name>' + formik.values.name + '</name>'
                 +'<genres>'+ listXml + '</genres>'
-                +'<author>' + author +'</author>'
-                +'<description>' + description +'</description>'
-                +'<releaseDate>' + releaseDate +'</releaseDate>'
-                +'<pages>' + pages +'</pages>'
-                +'<photoFileName>' + photofilename +'</photoFileName>'
+                +'<author>' + formik.values.author +'</author>'
+                +'<description>' + formik.values.description +'</description>'
+                +'<releaseDate>' + formik.values.releaseDate +'</releaseDate>'
+                +'<pages>' + formik.values.pages +'</pages>'
+                +'<photoFileName>' + import.meta.env.VITE_BACKEND_URI + '/Photos/' + formik.values.photoFileName +'</photoFileName>'
               +'</model>'
               +'<pendingBook>'
                 +'<userId>' + userId +'</userId>'
@@ -78,7 +114,7 @@ const ApplyBook = ({show, onHide}) => {
               if(xmlhttp.status === 200){
                 console.log(xmlhttp.responseText)
                 setMessage(convert.xml2js(xmlhttp.responseText))
-                setResponse(message.elements[0].elements[0].elements[0].elements[0].elements[0].text)
+                setResponse(convert.xml2js(xmlhttp.responseText).elements[0].elements[0].elements[0].elements[0].elements[0].text)
                 console.log(response)
               }
           }
@@ -87,8 +123,31 @@ const ApplyBook = ({show, onHide}) => {
         xmlhttp.send(sr);
       }
 
+      const handleSelectedGenres = (updatedGenres) => {
+        setSelectedOptions(updatedGenres)
+        formik.values.genres = updatedGenres
+    }
+
+    const handleSubmit = async(e) => {
+      e.preventDefault();
+      if(formik.values.photoFileName === ""){
+          formik.values.photoFileName = import.meta.env.VITE_BACKEND_URI + '/Photos/book.jpg'
+      }
+      formik.values.previewLink = "previewLink"
+      formik.handleSubmit();
+      console.log(formik.values)
+  }
+
     useEffect(() => {
-        GetGenres()
+        const GetSelectGenres = async() => {
+          try{
+            var genres = await GetGenres()
+            setGenres(genres)
+          } catch (e) {
+            console.log(e)
+          }
+        }
+        GetSelectGenres()
     }, [])
   return (
     <Modal
@@ -104,32 +163,35 @@ const ApplyBook = ({show, onHide}) => {
                     <Row>
                         <Col>
                         <Form>
-                        <BookInput label="Name" type="text" placeholder="Name" action={e => {setName(e.target.value)}} id="name" regex={/^[A-Z][a-z]*$/} errorMessage={errorMessages.name}/>
-                        <Form.Group>
-                            <Form.Label>Genres</Form.Label>
-                            <Select options={genres} isMulti value={selectedOptions} onChange={(selectedOptions) => setSelectedOptions(selectedOptions)}/>
-                        </Form.Group>
-                        <BookInput label="Author" type="text" placeholder="Author" action={e => {setAuthor(e.target.value)}} id="author" regex={/^(?!\s*$).+/} errorMessage={errorMessages.notempty}/>
-                        <BookInput label="Description" type="text" placeholder="Description" action={e => {setDescription(e.target.value)}} id="description" regex={/^(?!\s*$).+/} errorMessage={errorMessages.notempty}/>
-                        <BookInput label="Release Date" type="date" placeholder="Release Date" action={e => {setReleaseDate(e.target.value)}} id="releaseDate" regex={/^(?!\s*$).+/} errorMessage={errorMessages.notempty}/>
-                        <BookInput label="Pages" type="number" placeholder="Pages" action={e => {setPages(e.target.value)}} id="pages" regex={/^(?!\s*$).+/} errorMessage={errorMessages.notempty}/>
+                        <BookInput label="Name" type="text" placeholder="Name" id="name" defaultValue={formik.values.name} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.name} error={formik.errors.name}/>
+                        <BookMultiselectInput options={genres} isMulti value={selectedOptions} onChange={handleSelectedGenres}
+                        onBlur={formik.handleBlur} touched={formik.touched.genres} error={formik.errors.genres}/>
+                        <BookInput label="Author" type="text" placeholder="Author"  id="author" defaultValue={formik.values.author} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.author} error={formik.errors.author}/>
+                        <BookInput label="Description" type="text" placeholder="Description" id="description" defaultValue={formik.values.description} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.description} error={formik.errors.description}/>
+                        <BookInput label="Release Date" type="date" placeholder="Release Date" id="releaseDate" defaultValue={formik.values.releaseDate} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.releaseDate} error={formik.errors.releaseDate}/>
+                        <BookInput label="Pages" type="number" placeholder="Pages" id="pages" defaultValue={formik.values.pages} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.pages} error={formik.errors.pages}/>
                     </Form>
                         </Col>
                     
                     <Col sm={6}>
                         <Image className='imageBook' src={imagesrc}/>
-                        <input type="File" className='uploadImage'/>
+                        <input onChange={handleFileSelected} type="File" className='uploadImage'/>
                     </Col>
                     </Row>
                     
                 </Modal.Body>
                 <Modal.Footer>
-                <Button className='addbookM' onClick={HandleClick}>Apply</Button>
+                <Button className='addbookM' onClick={handleSubmit}>Apply</Button>
                 <Button className='canceladd' onClick={onHide}>Cancel</Button>
-                <h1>{response}</h1>
                 <br />
                 <br />
                   </Modal.Footer>
+                  <MessageContent show={openModal} onHide={() => setOpenModal(false)} message={response}/>
         </Modal>
   )
 }

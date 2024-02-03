@@ -1,0 +1,33 @@
+.search-books-container{
+    width:100%;
+}
+
+.search-books-container input{
+    border-radius: 15px;
+    outline: none;
+    border: none;
+    width: 30vw;
+    height: 3.5vh;
+    padding: 10px;
+}
+
+.book-search-results-container{
+    background-color: #FFF;
+    z-index: 2;
+}
+
+.book-search-results-container ul{
+    margin-top: 15px;
+}
+
+.book-search-results-container .book-result-info-container{
+    margin-left: -5.8%;
+    padding: 5px;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+}
+
+.book-search-results-container .book-result-info-container:hover{
+    background-color: gray;
+}

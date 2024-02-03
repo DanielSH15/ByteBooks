@@ -5,10 +5,8 @@ import { Modal } from 'react-bootstrap'
 import './RegistrationModal.css'
 import Input from '../../Input/Input'
 import SelectInput from '../../Input/SelectInput'
-import axios from 'axios'
 import MultiSelectInput from '../../Input/MultiSelectInput'
 import { GetGenres, Register } from './Data/Data'
-import ReadNotification from '../../Modals/ReadNotification/ReadNotification'
 import MessageContent from '../../Modals/MessageContent/MessageContent'
 
 const RegistrationModal = ({show, onHide}) => {
@@ -25,6 +23,7 @@ const RegistrationModal = ({show, onHide}) => {
       username: '',
       email: '',
       password: '',
+      confirmPassword: '',
       phone: '',
       dateOfBirth: '',
       genres: [],
@@ -32,8 +31,19 @@ const RegistrationModal = ({show, onHide}) => {
     },
     validationSchema: userSchema,
     onSubmit: async (values) => {
+      var insert = {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        username: values.username,
+        email: values.email,
+        password: values.password,
+        phone: values.phone,
+        dateOfBirth: values.dateOfBirth,
+        genres: values.genres,
+        gender: values.gender
+      }
       try{
-        const response = await Register(values)
+        const response = await Register(insert)
         console.log(response)
         setMessage(response)
         setOpenModal(true);
@@ -96,9 +106,10 @@ const RegistrationModal = ({show, onHide}) => {
                           onBlur={formik.handleBlur} touched={formik.touched.email} error={formik.errors.email}/>
                        </div>
                        <div className='inputContainer'>
-                          <Input type='text' label='Password' id='password' defaultValue={formik.values.password} onChange={formik.handleChange}
+                          <Input type='password' label='Password' id='password' defaultValue={formik.values.password} onChange={formik.handleChange}
                           onBlur={formik.handleBlur} touched={formik.touched.password} error={formik.errors.password}/>
-                          <Input type='text' label='Confirm Password' />
+                          <Input type='password' label='Confirm Password' id='confirmPassword' defaultValue={formik.values.confirmPassword} onChange={formik.handleChange}
+                          onBlur={formik.handleBlur} touched={formik.touched.confirmPassword} error={formik.errors.confirmPassword}/>
                        </div>
                        <div className='inputContainer'>
                           <Input type='text' label='Phone Number'id='phone' defaultValue={formik.values.phone} onChange={formik.handleChange}

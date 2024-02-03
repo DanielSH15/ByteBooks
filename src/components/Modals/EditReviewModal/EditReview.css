@@ -1,0 +1,47 @@
+.review-text-area{
+    width: 100%;
+    height: 30vh;
+    outline: none;
+    padding: 10px;
+}
+
+.edit-review-action-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.edit-review-button{
+    border-radius: 10px;
+    background-color: white;
+    border: solid;
+    border-color: green;
+    color:green;
+    border-width: 1px;
+    transition: 0.2s;
+    margin-left:1.5vw;
+    width: 15%;
+}
+
+.edit-review-button:hover{
+    background-color: green;
+    border-color: green;
+    color:white;
+}
+
+.cancel-edit-review-button{
+    width: 15%;
+    border-radius: 10px;
+    background-color: white;
+    border: solid;
+    border-color: red;
+    color:red;
+    border-width: 1px;
+    transition: 0.2s;
+}
+
+.cancel-edit-review-button:hover{
+    background-color: red;
+    border-color: red;
+    color:white;
+}

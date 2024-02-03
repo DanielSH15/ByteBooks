@@ -46,7 +46,7 @@ const BookItem = ({book, key}) => {
                 <FaTrash className='manage-book-action-trash' onClick={() => setDeleteModal(true)}/>
             </div>
         </div>
-        <EditBookModal show={editModal} onHide={() => setEditModal(false)} book={book} genresOfABook={genres} GetGenresOfABook={GetGenres}/>
+        <EditBookModal show={editModal} onHide={() => setEditModal(false)} book={book} />
         <DeleteConfirmationModal show={deleteModal} onHide={() => setDeleteModal(false)} onDelete={DeleteBook}/>
     </div>
   )

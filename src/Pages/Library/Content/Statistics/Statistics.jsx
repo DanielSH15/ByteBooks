@@ -2,15 +2,19 @@ import React from "react";
 import TotalBooksGraph from "./TotalBooksGraph/TotalBooksGraph";
 import './Statistics.css'
 import BorrowedBooksGraph from "./BorrowedBooksGraph/BorrowedBooksGraph";
+import AppliedBooksGraph from "./AppliedBooksGraph/AppliedBooksGraph";
 
 const Statistics = () => {
     return(
         <div>
-            <div className="book-stats-container">
+            <div>
                 <TotalBooksGraph />
             </div>
-            <div className="borrowed-stats-container">
+            <div>
                 <BorrowedBooksGraph />
+            </div>
+            <div>
+                <AppliedBooksGraph />
             </div>
         </div>
     )
