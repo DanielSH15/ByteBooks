@@ -1,0 +1,70 @@
+.update-profile-content-container{
+    width:100%;
+}
+
+.update-profile-content-container .data-fields{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.update-profile-content-container .data-fields .data-field{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    width: 65%;
+}
+
+.update-profile-content-container .update-profile-actions{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4vh;
+}
+
+.update-profile-content-container .update-profile-actions button{
+    width: 400px;
+    border-radius: 55px;
+    font-size: 35px;
+    background-color: #DB630C;
+    color: white;
+    font-weight: 900;
+    border: none;
+    filter: drop-shadow(0 0 0.75rem #DB630C);
+    transition: 0.3s;
+}
+
+.update-profile-content-container .update-profile-actions button:hover{
+    filter: drop-shadow(0 0 0.75rem orange)
+}
+
+.update-profile-content-container .update-profile-actions .delete-profile-action{
+    font-size: 25px;
+    margin-top: 15px;
+}
+
+@media screen and (max-width: 768px) {
+    .update-profile-content-container{
+        margin-top: 5vh;
+    }
+
+    .update-profile-content-container .data-fields .data-field{
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        width: 85%;
+    }
+
+    .update-profile-content-container .update-profile-actions button{
+        width: 300px;
+        border-radius: 35px;
+    }
+
+    .update-profile-content-container .data-fields{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

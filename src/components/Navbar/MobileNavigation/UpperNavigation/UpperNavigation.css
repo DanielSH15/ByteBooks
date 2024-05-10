@@ -1,0 +1,10 @@
+.mobile-upper-nav-content{
+    display: flex;
+}
+
+.mobile-upper-nav-search{
+    color: #FFF;
+    position: absolute;
+    right: 3%;
+    font-size: 30px;
+}

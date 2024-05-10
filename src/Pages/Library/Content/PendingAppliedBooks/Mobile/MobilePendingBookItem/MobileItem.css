@@ -1,0 +1,36 @@
+.pending-book-mobile-item{
+    width:100%;
+    height: 50px;
+    margin: 150px;
+}
+
+.pending-book-mobile-item .pending-book-mobile-item-content{
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+
+.pending-book-mobile-item .pending-book-mobile-item-content .pending-book-mobile-item-data{
+    width:80%;
+    height:250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #07080B;
+    border-radius: 15px;
+    border: solid;
+    border-width: 1px;
+    border-color: white;
+    padding: 15px;
+}
+
+.pending-book-mobile-item .pending-book-mobile-item-content .pending-book-mobile-item-data img{
+    width:70%;
+    height:80%;
+}
+
+.pending-book-mobile-item .pending-book-mobile-item-content .pending-book-mobile-item-data h1{
+    color: #E13701;
+    margin-top: 12px;
+}

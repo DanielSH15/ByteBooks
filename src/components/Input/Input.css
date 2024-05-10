@@ -32,9 +32,7 @@
     width: 110%;
 }
 
-.wrapper .inputData input::placeholder{
-    margin-left: 5px;
-}
+
 
 .inputData input:focus ~ label,
 .inputData input:valid ~ label{
@@ -60,5 +58,24 @@
     font-size: 14px;
     color: red;
     display: block;
-    margin-left: 1.5vw;
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper{
+        width: 90%;
+    }
+
+    .wrapper .inputData {
+        width: 100%;
+        margin:30px;
+    }
+
+    .wrapper .inputData label{
+        font-size: 15px;
+        margin-top: -4vh;
+    }
+
+    .errorS{
+        padding-left: 23px;
+    }
 }

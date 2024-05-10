@@ -1,7 +1,7 @@
 import React from 'react'
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
-const BorrowBookInfo = ({show, onHide, message}) => {
+const BorrowBookInfo = ({show, onHide, message}) => {  //THIS MODAL DISPLAYS THE ERROR AFTER BORROWING A BOOK (IF THERE IS ONE)
   return (
     <Modal
         size='lg'

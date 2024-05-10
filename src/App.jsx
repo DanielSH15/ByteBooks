@@ -17,6 +17,10 @@ import ReadingTest from './Pages/Library/Content/ReadingTest/ReadingTest';
 import DisplayNotification from './components/Notification/DisplayNotification';
 import OverdueBooks from './Pages/Library/Content/OverdueBooks/OverdueBooks';
 import OverdueNotification from './SignalR/OverdueNotification';
+import UpdateProfile from './Pages/UpdateProfile/UpdateProfile';
+import { AuthProvider } from './components/Contexts/AuthContext/AuthContext';
+import { Update } from './Pages/UpdateProfile/Data/Data';
+import { GenreProvider } from './components/Contexts/GenreContext/GenreContext';
 
 function App() {
 
@@ -36,6 +40,11 @@ function App() {
         <Route path='/statistics' element={<Statistics />} />
         <Route path='/readingtest' element={<ReadingTest />}/>
         <Route path='/overduebooks' element={<OverdueBooks />}/>
+        <Route path='/updateprofile' element={<AuthProvider>
+            <GenreProvider>
+              <UpdateProfile />
+            </GenreProvider>
+          </AuthProvider>} />
       </Routes>
     </BrowserRouter>
   )

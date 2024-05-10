@@ -1,39 +1,14 @@
-.addbookM{
-    width: 15%;
-    height: 9%;
-    border-radius: 10px;
-    background-color: white;
-    border: solid;
-    border-color: green;
-    color:green;
-    border-width: 1px;
-    transition: 0.2s;
+.add-book-button{
+    width: 150px;
+    height: 50px;
 }
 
-.addbookM:hover{
-    background-color: green;
-    border-color: green;
-    color:white;
+.cancel-add-book-button{
+    width: 150px;
+    height: 50px;
 }
 
-.canceladd{
-    width: 15%;
-    height: 9%;
-    border-radius: 10px;
-    background-color: white;
-    border: solid;
-    border-color: red;
-    color:red;
-    border-width: 1px;
-    transition: 0.2s;
-    margin-left:1.5vw;
-}
 
-.canceladd:hover{
-    background-color: red;
-    border-color: red;
-    color:white;
-}
 
 .imageBook{
     width:250px;
@@ -58,5 +33,11 @@
 .actions-edit-container{
     width: 100%;
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+    .add-book-image-container{
+        display: none;
+    }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {HiX} from'react-icons/hi' 
 import './BookInfoModal.css'
 import axios from 'axios'

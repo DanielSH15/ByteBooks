@@ -1,37 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import './Cart.css'
-import axios from 'axios'
-import CartItem from './CartItem/CartItem'
+import NormalCart from './RegularCart/NormalCart'
+import MobileCart from './MobileCart/MobileCart'
 
 const Cart = () => {
-  const [books, setBooks] = useState([])
-  const data = []
-  var id = localStorage.getItem("userId")
 
-  const GetBorrowedBooks = async() => {
-    try{
-      await axios.get(import.meta.env.VITE_BACKEND_URI + '/api/borrowedbooks/getbyuser/' + id)
-      .then((response) => {
-        setBooks(response.data)
-        console.log(response.data)
-      })
-    } catch (e){
-        console.log(e.response.data)
-    }
-  }
+  const [isPhone, setIsPhone] = useState(false)
 
   useEffect(() => {
-    GetBorrowedBooks()
+    const handleResize = () => {
+      if(window.innerWidth < 768){
+          setIsPhone(true)
+      } else {
+          setIsPhone(false)
+      }
+  }
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, [])
-  return (
-    <div className='cartContainer'>
-         {
-          books.map((value, i) => {
-            return(
-                <CartItem book = {books[i]}/>
-            )
-          })
-         }
+
+  return(
+    <div className='overall-cart-container'>
+      <div className='mobile-cart-container'>
+        <MobileCart />
+      </div>
+      <div className='normal-cart-container'>
+        <NormalCart />
+      </div>
     </div>
   )
 }

@@ -1,0 +1,15 @@
+.user-applied-books-desktop{
+    width:99vw;
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-applied-books-desktop .user-applied-books-desktop-items{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:50px;
+}

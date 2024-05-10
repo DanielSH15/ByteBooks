@@ -9,3 +9,16 @@
     margin-top: 5vh;
     width: 80%;
 }
+
+.mobile-overdue-books{
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .desktop-overdue-books{
+        display: none;
+    }
+    .mobile-overdue-books{
+        display: block;
+    }
+}

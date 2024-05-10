@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
-import BorrowedBookInfo from '../../../components/Modals/BorrowedBook/BorrowedBookInfo'
-import './CartItem.css'
+import BorrowedBookInfo from '../../../../components/Modals/BorrowedBook/BorrowedBookInfo'
+import './NormalCartItem.css'
 
-const CartItem = ({book}) => {
-  var imgsrc = book.photoFileName
+const NormalCartItem = ({book}) => {
+    var imgsrc = book.photoFileName
   const [modalOpened, setModalOpened] = useState(false)
   return (
     <span>
@@ -20,4 +20,4 @@ const CartItem = ({book}) => {
   )
 }
 
-export default CartItem
+export default NormalCartItem

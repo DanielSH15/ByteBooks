@@ -4,6 +4,7 @@ import axios from 'axios'
 import './ReadNotification.css'
 
 const ReadNotification = ({show, onHide, message}) => {
+    const title = message.isCritical ? "Notification content - critical" : "Notification content"
     const ReadMessage = async() => {
         try{
             await axios.delete(import.meta.env.VITE_BACKEND_URI + "/api/user/deletemessage/" + message.messageId)
@@ -24,7 +25,7 @@ const ReadNotification = ({show, onHide, message}) => {
         show={show}
         >
             <Modal.Header>
-                <Modal.Title>Notification content</Modal.Title>
+                <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 {message.content}

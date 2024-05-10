@@ -1,33 +1,13 @@
-.overall-manage-books-container{
-    margin-top: 5vh;
+.mobile-management{
+    display: none;
 }
 
-.overall-manage-books-container h1{
-    text-decoration: none;
-    color: #D4B996FF;
-    margin-left: 10vw;
-}
+@media screen and (max-width: 768px) {
+    .desktop-management{
+        display: none;
+    }
 
-.manage-books-container{
-    display: flex;
-    justify-content: center;
-    margin-top: 2vh;
-}
-
-.manage-books-items-container{
-    background-color: #1A1919;
-    width: 80%;
-    border-radius: 15px;
-}
-
-.actions-manage-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width:100%;
-}
-
-.actions-manage-container input{
-    width: 30%;
-    margin-left: 38%;
+    .mobile-management{
+        display: block;
+    }
 }

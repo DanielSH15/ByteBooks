@@ -1,0 +1,57 @@
+.data-field-wrapper{
+    width:100%;
+    height: 80px;
+    margin: 20px;
+}
+
+.data-field-wrapper .data-field-title-container{
+    width:100%;
+    padding-left: 10px;
+    margin-bottom: 5px;
+}
+
+.data-field-wrapper .data-field-title-container .data-field-title{
+    color: #FFF;
+}
+
+.data-field-contents{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50px;
+}
+
+.data-field-contents .data-field-data{
+    background-color: #07080B;
+    height: 100%;
+    width: 90%;
+    border-radius: 17px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    color: #FFF;
+    font-weight: 800;
+    border: solid;
+    border-color: #DB630C;
+    border-width: 1px;
+    font-size: 24px;
+}
+
+.data-field-contents .data-field-icon{
+    font-size: 35px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: #DB630C
+}
+
+.data-field-contents .data-field-data input{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: #FFF;
+    width:100%;
+}
+
+.data-field-contents .input-field-error{
+    color: red;
+}

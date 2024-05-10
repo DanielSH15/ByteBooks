@@ -8,26 +8,34 @@ const Messages = ({open}) => {
     const[messages, setMessages] = useState([])
     const[modalOpen, setModalOpen] = useState(false)
     const[flag, setFlag] = useState(false)
+    const[loading, setLoading] = useState(true)
     const id = localStorage.getItem("userId")
 
-    const GetMessages = async() => {
-        try{
-            await axios.get(import.meta.env.VITE_BACKEND_URI + '/api/user/getusermessages/' + JSON.parse(id))
-            .then((response) => {
-                setMessages(response.data)
-                if(response.data.length > 0 && !flag){
-                    setModalOpen(true)
-                    setFlag(true)
-                }
-            })
-        } catch (e) {
-            console.log(e.response.data)
-        }
-    }
+
 
     useEffect(() => {
+        const GetMessages = async() => {
+            try{
+                await axios.get(import.meta.env.VITE_BACKEND_URI + '/api/user/getusermessages/' + JSON.parse(id))
+                .then((response) => {
+                    setMessages(response.data)
+                    setLoading(false)
+                    if(response.data.length > 0 && !flag){
+                        setModalOpen(true)
+                        setFlag(true)
+                    }
+                })
+            } catch (e) {
+                console.log(e.response.data)
+            }
+        }
+
         GetMessages()
-    })
+    }, [])
+
+    if(loading){
+        return <div>Loading...</div>
+    }
 
     const CheckData = () => {
         if(messages.length > 0){

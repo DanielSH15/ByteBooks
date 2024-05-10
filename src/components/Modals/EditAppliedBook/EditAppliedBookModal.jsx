@@ -66,7 +66,7 @@ const EditAppliedBookModal = ({show, onHide, book}) => {
             +'<description>' + formik.values.description +'</description>'
             +'<releaseDate>' + formik.values.releaseDate +'</releaseDate>'
             +'<pages>' + formik.values.pages +'</pages>'
-            +'<photoFileName>' + import.meta.env.VITE_BACKEND_URI + '/Photos/' + photofilename +'</photoFileName>'
+            +'<photoFileName>'+ photofilename +'</photoFileName>'
             +'<id>' + id + '</id>'
           +'</model>'
         + '</Update>'
@@ -149,8 +149,8 @@ const handleFileSelected = (e) => {
   })
   .then(res => res.json())
   .then((result) => {
-   imagesrc = result
-   setPhotoFileName(result)
+   imagesrc = import.meta.env.VITE_BACKEND_URI + '/Photos/' + result
+   setPhotoFileName(import.meta.env.VITE_BACKEND_URI + '/Photos/' + result)
    console.log(imagesrc)
   },
   (error) => {

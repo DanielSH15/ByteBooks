@@ -5,7 +5,6 @@ import './Ratings.css'
 
 const Ratings = ({bookId}) => {
     const [ratings, setRatings] = useState([])
-    const [users, setUsers] = useState([])
 
     const GetRatings = async() => {
        try{

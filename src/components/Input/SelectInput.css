@@ -1,5 +1,5 @@
 .wrapperSelect{
-    width:36.5%;
+    width:37%;
 }
 
 .wrapperSelect .inputDataSelect{
@@ -9,7 +9,7 @@
 
 .wrapperSelect .inputDataSelect {
     width: 100%;
-    margin:25px;
+    margin:30px;
 }
 
 
@@ -37,4 +37,11 @@
     border: none;
     outline: none;
     transition: 0.3s ease;
+}
+
+@media screen and (max-width:768px) {
+    .wrapperSelect{
+        width:88%;
+    }
+    
 }

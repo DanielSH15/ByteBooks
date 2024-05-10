@@ -1,0 +1,14 @@
+.edit-users-admin-actions-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-user-admin-button-modal{
+    width:150px;
+    height: 50px;
+}
+
+.cancel-add-user-admin-button-modal{
+    width:150px;
+    height:50px;
+}

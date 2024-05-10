@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { HiUser, HiPencil, HiTrash } from 'react-icons/hi'
 import { GetUserGenres } from '../../Data/Data'
 import EditUserModal from '../../../../../components/Modals/EditUserAdmin/EditUserModal'
+import DeleteConfirmation from '../../../../../components/Modals/DeleteConfirmation/DeleteConfirmationModal'
 import axios from 'axios'
 
 const UserItem = (props) => {
-    const [userGenres, setUserGenres] = useState([])
-    const [genres, setGenres] = useState([])
     const[modalOpen, setModalOpen] = useState(false)
+    const[deleteModalOpen, setDeleteModalOpen] = useState(false)
 
     const GetSelectedGenres = async() => {
         try{
@@ -31,6 +31,20 @@ const UserItem = (props) => {
         }
     }
 
+    const DeleteUser = async() => {
+        try{
+            await axios.delete(import.meta.env.VITE_BACKEND_URI + '/api/user/' + props.user.userId)
+            .then((response) => {
+                console.log(response)
+                window.location.reload(false)
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+
+
     useEffect(() => {
         GetGenres()
         GetSelectedGenres()
@@ -44,13 +58,14 @@ const UserItem = (props) => {
         <td>{props.user.accessKey}</td>
         <td>
             <HiPencil style={{cursor: 'pointer'}} onClick={() => setModalOpen(true)}/>
-            <HiTrash style={{cursor: 'pointer'}}/>
+            <HiTrash style={{cursor: 'pointer'}} onClick={() => setDeleteModalOpen(true)}/>
         </td>
         <EditUserModal
           user={props.user}
           show={modalOpen}
           onHide={() => setModalOpen(false)}
         />
+        <DeleteConfirmation show={deleteModalOpen} onHide={() => setDeleteModalOpen(false)} onDelete={DeleteUser}/>
     </tr>
   )
 }

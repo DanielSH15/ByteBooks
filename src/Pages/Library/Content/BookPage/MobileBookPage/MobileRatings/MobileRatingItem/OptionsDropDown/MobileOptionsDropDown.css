@@ -1,0 +1,29 @@
+.mobile-rating-options-container .mobile-options-menu{
+    background: #07080B;
+}
+
+.mobile-rating-options-container .mobile-options-menu.active{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: 0.5s ease;
+}
+
+.mobile-rating-options-container .mobile-options-menu.inactive{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: 0.3s ease;
+}
+
+.mobile-rating-options-container .mobile-options-menu h4{
+    font-weight: 200;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.mobile-rating-options-container .options-dots{
+    font-size: 30px;
+    cursor: pointer;
+    margin-left: 10vh;
+}

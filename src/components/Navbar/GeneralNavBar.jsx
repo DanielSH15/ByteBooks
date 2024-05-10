@@ -4,7 +4,7 @@ import UserNavbar from './UserNavbar'
 
 
 const GeneralNavBar = () => {
-  const token = sessionStorage.getItem("token")
+  const token = sessionStorage.getItem("token")  //check if there is a logged user
   if(token != null){
     return (
       <UserNavbar />
@@ -17,3 +17,4 @@ const GeneralNavBar = () => {
 }
 
 export default GeneralNavBar
+

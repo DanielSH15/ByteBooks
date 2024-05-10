@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import './InitDashboard.css'
 import RegistrationModal from '../../../components/Modals/Registration/RegistrationModal'
+import Button from '../../../components/Buttons/DefaultButton/Button'
 
 const InitDashboard = () => {
     const[registrationVisible, setRegistrationVisible] = useState(false)
@@ -16,7 +17,7 @@ const InitDashboard = () => {
                 <h1>Craft your own reading journey.</h1>
                 <h1>Post your own books.</h1>
                 <h1>Welcome to <span style={{color: '#E13701'}}>ByteBooks!</span></h1>
-                <button onClick={() => setRegistrationVisible(true)}>Sign Up</button>
+                <Button text={"Sign Up"} onClick={() => setRegistrationVisible(true)}/>
             </div>
             <div className='bookDivContainer'>
               <div className='bookIconContainer'></div>
@@ -52,7 +53,7 @@ const InitDashboard = () => {
           </div>
           <div className='sectionTwoContainer'>
             <h1>Sign Up And Start Your Reading Journey!</h1>
-            <button onClick={() => setRegistrationVisible(true)}>Sign Up</button>
+            <Button onClick={() => setRegistrationVisible(true)} text={"Sign Up"}/>
           </div>
         </div>
       </div>

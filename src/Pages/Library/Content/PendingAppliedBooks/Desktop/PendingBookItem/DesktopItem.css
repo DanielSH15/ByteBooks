@@ -1,0 +1,33 @@
+.pending-applied-item-container{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.pending-applied-item-container .pending-applied-item-content-container{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    background-color: #07080B;
+    border-radius: 15px;
+    padding-left: 15px;
+    cursor: pointer;
+}
+
+.pending-applied-item-container .pending-applied-item-content-container .pending-applied-item-data-container{
+    width:100%;
+    height:100%;
+    display: flex;
+    align-items: center;
+}
+
+.pending-applied-item-container .pending-applied-item-content-container .pending-applied-item-data-container img{
+    width: 10%;
+    height: 80%;
+}
+.pending-applied-item-container .pending-applied-item-content-container .pending-applied-item-data-container h1{
+    margin-left: 5%;
+    color: #E13701;
+}

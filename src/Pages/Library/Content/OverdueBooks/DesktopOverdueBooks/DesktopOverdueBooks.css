@@ -1,0 +1,13 @@
+.overdue-page-container{
+    width:100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2vh;
+}
+
+.overdue-books-container{
+    margin-top: 5vh;
+    width: 80%;
+}

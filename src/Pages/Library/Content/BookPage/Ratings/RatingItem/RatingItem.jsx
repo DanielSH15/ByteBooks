@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import {FaUser} from 'react-icons/fa'
-import {HiDotsCircleHorizontal, HiDotsHorizontal} from 'react-icons/hi'
 import axios from 'axios'
 import './RatingItem.css'
 import OptionsDropDown from './OptionsDropDown/OptionsDropDown'
@@ -40,7 +39,9 @@ const RatingItem = ({rating}) => {
                <h5>{rating.content}</h5>
             </div>
             <hr style={{color: '#FFF'}}/>
-            {GetOptions()}
+            <div className='options-rating-contaier'>
+                {GetOptions()}
+            </div>
         </div>
     )
 }

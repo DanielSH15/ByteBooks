@@ -1,0 +1,9 @@
+.mobile-rating-container{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 5vh;
+}
+.mobile-rating-info{
+    width:100%;
+    margin-left: 2vh;
+}

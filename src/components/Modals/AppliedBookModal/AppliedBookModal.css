@@ -1,4 +1,4 @@
-.addgenreAM{
+.approve-applied-book{
     width: 15%;
     height: 40px;
     border-radius: 10px;
@@ -15,13 +15,13 @@
     border-width: 1px;
 }
 
-.addgenreAM:hover{
+.approve-applied-book:hover{
     background-color: green;
     border-color: green;
     color:white;
 }
 
-.canceladdAM{
+.decline-applied-book{
     width: 15%;
     height: 40px;
     border-radius: 10px;
@@ -38,7 +38,7 @@
     border-width: 1px;
 }
 
-.canceladdAM:hover{
+.decline-applied-book:hover{
     background-color: red;
     border-color: red;
     color:white;

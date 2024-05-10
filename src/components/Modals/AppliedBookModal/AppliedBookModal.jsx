@@ -53,7 +53,7 @@ const AppliedBookModal = ({show, onHide, book}) => {
     }
     xmlhttp.setRequestHeader('Content-Type', 'text/xml');
     xmlhttp.send(sr);
-    
+    window.location.reload(false)
   }
 
   return (
@@ -71,8 +71,8 @@ const AppliedBookModal = ({show, onHide, book}) => {
                     <h4 style={{marginLeft: '30px'}}>{book.elements[3].elements[0].text}</h4>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button className='addgenreAM' onClick={HandleClickApprove}>Approve</Button>
-                <Button className='canceladdAM' onClick={HandleClickDecline}>Decline</Button>
+                <Button className='approve-applied-book' onClick={HandleClickApprove}>Approve</Button>
+                <Button className='decline-applied-book' onClick={HandleClickDecline}>Decline</Button>
                 <br />
                 <br />
                   </Modal.Footer>

@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react';
 import convert from 'xml-js';
 import AppliedBookItem from './AppliedBookItem/AppliedBookItem';
 import { useNavigate } from 'react-router-dom';
+import DesktopAppliedBooks from './Desktop/DesktopAppliedBooks';
+import MobileAppliedBooks from './Mobile/MobileAppliedBooks';
+import './UserAppliedBooks.css'
 
 
 const UserAppliedBooks = () => {
@@ -17,7 +20,7 @@ const UserAppliedBooks = () => {
         '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">'
           + '<Body>'
             + ' <GetAppliedBooksOfAUser xmlns="http://tempuri.org/">'
-              + '<userId>'+ localStorage.getItem("userId") +'</userId>'
+              + '<userId>'+ JSON.parse(localStorage.getItem("userId")) +'</userId>'
             + '</GetAppliedBooksOfAUser>'
           + '</Body>'
         + '</Envelope>'     
@@ -41,15 +44,11 @@ const UserAppliedBooks = () => {
 
   return (
     <div>
-      <h3 style={{marginLeft: '30vh', color: '#D4B996FF', cursor: 'pointer'}} onClick={() => navigate('/library')}>Back To Library</h3>
-       <div className='pendingBooksContainer'>
-        {
-          response?.map((value, i) => {
-            return(
-              <AppliedBookItem book={response[i]}/>
-            )
-          })
-        }
+      <div className='desktop-user-applied-books'>
+        <DesktopAppliedBooks />
+      </div>
+      <div className='mobile-user-applied-books'>
+        <MobileAppliedBooks />
       </div>
     </div>
   )

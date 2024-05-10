@@ -27,6 +27,15 @@ export const Update = async(values) => {
     }
 }
 
+export const deleteUser = async(userId) => {
+    try{
+        const response = await axios.delete(import.meta.env.VITE_BACKEND_URI + '/api/user/' + userId)
+        return response.data;
+    } catch (e) {
+        throw e;
+    }
+}
+
 export const RefreshToken = async(user) => {
     try{
         await axios.post(import.meta.env.VITE_BACKEND_URI + '/api/login', {

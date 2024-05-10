@@ -9,18 +9,7 @@ const BookItem = ({book, key}) => {
     var imgsrc = book.photoFileName
     const[editModal, setEditModal] = useState(false)
     const[deleteModal, setDeleteModal] = useState(false)
-    const[genres, setGenres] = useState([])
 
-    const GetGenres = async() => {
-        try{
-            await axios.get('http://localhost:5226/api/book/getgenresbyid/' + book.bookId)
-            .then((response) => {
-                setGenres(response.data)
-            })
-        } catch (e) {
-            console.log(e.response.data)
-        }
-    }
 
     const DeleteBook = async() => {
         try{

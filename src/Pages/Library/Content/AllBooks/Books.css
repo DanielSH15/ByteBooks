@@ -3,3 +3,34 @@
     flex-direction: column;
     justify-content: center;
 }
+
+.pagination-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.mobile-booklist{
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .all-books-content-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+    }
+
+    .pagination-container{
+        display: none;
+    }
+
+    .mobile-booklist{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .desktop-booklist{
+        display: none;
+    }
+}

@@ -4,7 +4,6 @@ import Slider from './Slider/Slider'
 import { useNavigate } from 'react-router-dom'
 
 const UserDashboard = () => {
-  const navigate = useNavigate()
   const firstSlide = <div className='firstSlideContent'>
     <h1>View Our Library</h1>
   </div>

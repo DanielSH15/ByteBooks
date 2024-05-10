@@ -8,6 +8,7 @@ import SelectInput from '../../Input/SelectInput'
 import MultiSelectInput from '../../Input/MultiSelectInput'
 import { GetGenres, Register } from './Data/Data'
 import MessageContent from '../../Modals/MessageContent/MessageContent'
+import Button from '../../Buttons/DefaultButton/Button'
 
 const RegistrationModal = ({show, onHide}) => {
   const[genres, setGenres] = useState([])
@@ -89,7 +90,9 @@ const RegistrationModal = ({show, onHide}) => {
         >
             <div className='modalContainer'>
             <Modal.Header closeButton>
-                <Modal.Title><h1 style={{marginLeft: '26.5vh'}}>Registration</h1></Modal.Title>
+              <div className='registration-modal-title'>
+                <Modal.Title><h1>Registration</h1></Modal.Title>
+              </div>
             </Modal.Header>
                 <Modal.Body>
                     <div className='inputs'>
@@ -125,7 +128,7 @@ const RegistrationModal = ({show, onHide}) => {
                        </div>
                     </div>
                     <div className='submitContainer'>
-                        <button onClick={handleSubmit}>Sign Up</button>
+                        <Button text={"Submit"} onClick={handleSubmit}/>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>

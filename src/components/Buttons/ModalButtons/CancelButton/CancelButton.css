@@ -1,0 +1,17 @@
+.cancel-button-modal{
+    width: 100%;
+    height:100%;
+    border-radius: 10px;
+    background-color: white;
+    border: solid;
+    border-color: red;
+    color:red;
+    border-width: 1px;
+    transition: 0.2s;
+}
+
+.cancel-button-modal:hover{
+    background-color: red;
+    border-color: red;
+    color:white;
+}

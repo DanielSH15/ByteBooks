@@ -4,10 +4,12 @@ import './Logo.css'
 
 const Logo = () => {
   return (
-    <Link to='/' className='logoTitle'>
-      <div className='logoContainer'></div>
-      <h1>ByteBooks</h1>
-    </Link>
+    <div className='logo-contents-container'>
+      <Link to='/' className='logoTitle'>
+        <div className='logoContainer'></div>
+        <h1>ByteBooks</h1>
+      </Link>
+    </div>
   )
 }
 

@@ -1,3 +1,7 @@
+.navigation-container{
+  width: 100%;
+}
+
 .userNavbarContainer{
     height: 10vh;
     display: flex;
@@ -22,4 +26,28 @@
   position: absolute;
   left: 38%;
   top: 3%;
+}
+
+.lower-navigation-container{
+  width: 100%;
+  height: 60px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.mobile-navigation-container{
+  width:100%;
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .mobile-navigation-container{
+    display: block;
+  }
+
+  .regular-navigation-container{
+    display: none;
+  }
 }

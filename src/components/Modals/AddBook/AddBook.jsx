@@ -1,7 +1,5 @@
-import  Axios  from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, Modal, Row, Image } from 'react-bootstrap';
-import Select from 'react-select';
 import './AddBook.css'
 import BookInput from './Input/BookInput';
 import { GetGenres } from './Data/Data';
@@ -10,6 +8,8 @@ import { bookSchema } from '../../../Validations/BookValidation';
 import BookMultiselectInput from './Input/BookMultiselectInput';
 import { InsertBook } from './Data/Data';
 import MessageContent from '../MessageContent/MessageContent';
+import SubmitButton from '../../Buttons/ModalButtons/SubmitButton/SubmitButton';
+import CancelButton from '../../Buttons/ModalButtons/CancelButton/CancelButton';
 
 const AddBook = ({show, onHide}) => {
     const [selectedOptions, setSelectedOptions] = useState([])
@@ -100,7 +100,8 @@ const AddBook = ({show, onHide}) => {
     }, [])
 
     return(
-        <Modal
+        <div>
+            <Modal
         size='lg'
         centered
         show={show}
@@ -129,7 +130,7 @@ const AddBook = ({show, onHide}) => {
                     </Form>
                         </Col>
                     
-                    <Col sm={6}>
+                    <Col sm={6} className='add-book-image-container'>
                         <Image className='imageBook' src={imagesrc}/>
                         <input onChange={handleFileSelected} type="File" className='uploadImage'/>
                     </Col>
@@ -138,12 +139,17 @@ const AddBook = ({show, onHide}) => {
                 </Modal.Body>
                 <Modal.Footer>
                 <div className='actions-edit-container'>
-                    <Button className='addbookM' onClick={handleSubmit}>Add</Button>
-                    <Button className='canceladd' onClick={onHide}>Cancel</Button>
+                    <div className='add-book-button'>
+                        <SubmitButton text="Add" action={handleSubmit}/>
+                    </div>
+                    <div className='cancel-add-book-button'>
+                        <CancelButton text="Cancel" action={onHide}/>
+                    </div>
                 </div>
                   </Modal.Footer>
                   <MessageContent show={openModal} onHide={() => setOpenModal(false)} message={message}/>
         </Modal>
+        </div>
     )
 }
 

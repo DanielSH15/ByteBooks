@@ -4,6 +4,11 @@
     background-size: cover;
 }
 
+.modalContainer .registration-modal-title{
+    width:100%;
+    text-align: center;
+}
+
 .modalContainer h1{
     color: #DB630C;
     font-weight: 900;
@@ -31,18 +36,17 @@
 .modalContainer .submitContainer button{
     border-radius: 55px;
     font-size: 45px;
-    background-color: #DB630C;
-    color: white;
-    font-weight: 900;
-    border: none;
-    filter: drop-shadow(0 0 0.75rem #DB630C);
-    transition: 0.3s;
     height: 10vh;
     width: 32vh;
     margin-top:5%;
     margin-bottom: 5%;
 }
 
-.modalContainer .submitContainer button:hover{
-    filter: drop-shadow(0 0 0.75rem orange);
+
+@media screen and (max-width: 768px) {
+    .modalContainer .inputContainer{
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+    }
 }

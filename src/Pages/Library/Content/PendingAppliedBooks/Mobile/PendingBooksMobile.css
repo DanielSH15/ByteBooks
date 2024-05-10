@@ -1,0 +1,21 @@
+.mobile-pending-books-container{
+    width:100vw;
+    height: 100vh;
+}
+
+.mobile-pending-books-container .mobile-pending-books-content{
+    width:100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2vh;
+}
+
+.mobile-pending-books-container .mobile-pending-books-content .mobile-pending-books-items{
+    width:100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -2,30 +2,24 @@ import React, { useEffect, useState } from 'react'
 import { GetGenres, GetUsers } from './Data/Data'
 import UsersTable from './UserManagementComponents/Table/Table'
 import EditUserModal from '../../../components/Modals/EditUserAdmin/EditUserModal'
+import './UserManagement.css'
+import AddUserModal from '../../../components/Modals/AddUserAdmin/AddUserModal'
 
 const UserManagement = () => {
   const[data, setData] = useState([])
-  const [selectedUser, setSelectedUser] = useState(null);
-  const[modalOpen, setModalOpen] = useState(false)
-  const[userGenres, setUserGenres] = useState([])
-
+  const[searchTerm, setSearchTerm] = useState('')
+  const[addUserModalOpen, setAddUserModalOpen] = useState(false)
   const[genres, setGenres] = useState([])
 
   const handleEditClick = (user, userGenres) => {
     setSelectedUser(user);
-    setUserGenres(userGenres)
     setModalOpen(true)
   };
 
-  const handleSaveUser = (editedUser) => {
-    const updatedUsers = data.map(user =>
-      user.id === editedUser.id ? editedUser : user
-    );
-    setData(updatedUsers);
-  };
+
+  const filteredUsers = data.filter(user => user.username.toLowerCase().includes(searchTerm.toLowerCase()) && user.accessKey !== 10)
 
 
-  
   useEffect(() => {
     const GetData = async() => {
       try{
@@ -50,8 +44,17 @@ const UserManagement = () => {
     GetOptionsGenres()
   }, [])
   return (
-    <div>
-      <UsersTable users={data} onEditClick={handleEditClick}/>
+    <div className='admin-page-container'>
+      <div className='search-user-container'>
+        <input type='text' placeholder='Search by username...' onChange={(e) => setSearchTerm(e.target.value)}/>
+      </div>
+      <button onClick={() => setAddUserModalOpen(true)} className='add-user-admin-button'>Add User</button>
+      <div className='data-table-container' style={{textAlign: 'center'}}>
+        {filteredUsers.length > 0 ? (
+          <UsersTable users={filteredUsers} onEditClick={handleEditClick}/>
+        ) : <h3 style={{color: '#FFF'}}>No matching users found.</h3>}
+      </div>
+      <AddUserModal show={addUserModalOpen} onHide={() => setAddUserModalOpen(false)}/>
     </div>
   )
 }

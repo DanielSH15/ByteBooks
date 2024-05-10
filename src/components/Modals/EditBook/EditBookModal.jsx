@@ -1,4 +1,3 @@
-import  Axios  from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, Modal, Row, Image } from 'react-bootstrap';
 import { bookSchema } from '../../../Validations/BookValidation';
@@ -38,7 +37,7 @@ const EditBookModal = ({show, onHide, book}) => {
                 description: values.description,
                 releaseDate: values.releaseDate,
                 pages: values.pages,
-                photoFileName: import.meta.env.VITE_BACKEND_URI + '/Photos/' + values.photoFileName,
+                photoFileName: values.photoFileName != book.photoFileName ? import.meta.env.VITE_BACKEND_URI + '/Photos/' + values.photoFileName : values.photoFileName,
                 previewLink: values.previewLink
             }
             try{

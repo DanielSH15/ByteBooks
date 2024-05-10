@@ -12,6 +12,7 @@ export const GetGenres = async() => {
 export const Register = async(data) => {
     try{
         console.log(data)
+        //API HTTP request
         const response = await axios.post(import.meta.env.VITE_BACKEND_URI + '/api/user', data)
         return response.data;
     } catch (e){

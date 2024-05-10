@@ -1,0 +1,12 @@
+.mobile-cart-container{
+    width:100vw;
+    height: 100vh;
+    padding-top: 10vh;
+}
+
+.mobile-cart-container .mobile-cart-items-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}

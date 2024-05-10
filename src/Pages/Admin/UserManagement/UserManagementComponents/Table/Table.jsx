@@ -1,6 +1,5 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
-import { HiPencil, HiTrash, HiUser } from 'react-icons/hi'
 import UserItem from '../UserItem/UserItem'
 
 const tableStyle = {

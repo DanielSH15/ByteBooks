@@ -1,0 +1,12 @@
+.mobile-user-applied-books{
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .mobile-user-applied-books{
+        display: block;
+    }
+    .desktop-user-applied-books{
+        display: none;
+    }
+}

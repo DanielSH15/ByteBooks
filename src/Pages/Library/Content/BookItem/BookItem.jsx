@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 
 const BookItem = ({book}) => {
    const imgsrc = book.photoFileName
-   const [editBookVisible, setEditBookVisible] = useState(false)
    const [accessKey, setAccessKey] = useState(0)
    const token = sessionStorage.getItem("token")
 

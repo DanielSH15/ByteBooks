@@ -1,21 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Navbar.css'
 import Logo from './NavbarComponents/Logo/Logo'
 import NavigationLink from './NavbarComponents/NavigationLink/NavigationLink'
 import SignUpNavLink from './NavbarComponents/SignUpLink/SignUpNavLink'
 import LoginModal from '../Modals/Login/LoginModal'
+import GuestNavbar from './GuestNavbar/GuestNavbar'
+import GuestSideNavbar from './SideNavbar/GuestSideNavbar'
 
-export const Navbar = () => {
-  const [modalLoginOpen, setModalLoginOpen] = useState(false);
+export const Navbar = () => { 
 
-  return (
-    <div className='navbarContainer'>
-      <Logo />
-      <NavigationLink location = '/' text = 'Home'/>
-      <NavigationLink text = 'About' onClick={() => window.scrollTo({top: 950, behavior: 'smooth'})}/>
-      <NavigationLink text = 'Login' onClick={() => setModalLoginOpen(true)}/>
-      <LoginModal show={modalLoginOpen} onHide={() => setModalLoginOpen(false)}/>
-      <SignUpNavLink />
+  return(
+    <div className='navigation-bar-container'>
+      <div className='guest-side-nav-bar'>
+        <GuestSideNavbar />
+      </div>
+      <div className='guest-nav-bar'>
+        <GuestNavbar />
+      </div>
     </div>
   )
 }

@@ -29,3 +29,11 @@
     font-size: 25px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+    .side-nav-container{
+        display: flex;
+        margin-top: 20%;
+        z-index: 999;
+    }
+}

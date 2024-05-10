@@ -1,0 +1,13 @@
+.imageBook{
+    display: block;
+}
+
+@media screen and(max-width: 768px) {
+    .imageBook{
+        display: none;
+    }
+
+    .uploadImage{
+        display: none;
+    }
+}

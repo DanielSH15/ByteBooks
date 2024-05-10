@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './ReadingTest.css'
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import StopWatch from "./StopWatch/StopWatch";
 import Explanation from "../../../../components/Modals/ReadingTestExplanation/Explanation";
 import axios from "axios";
@@ -11,6 +11,7 @@ const ReadingTest = () => {
     const[isRunning, setIsRunning] = useState(false)
     const[time, setTime] = useState(0)
     const location = useLocation()
+    const navigate = useNavigate()
 
     var insert = {
         userId: JSON.parse(localStorage.getItem("userId")),
@@ -24,6 +25,7 @@ const ReadingTest = () => {
                 console.log(response.data)
                 localStorage.setItem("borrowTime", response.data)
             })
+            navigate('/library')
         } catch (e){
             console.log(e.response.data)
         }
@@ -34,7 +36,7 @@ const ReadingTest = () => {
             <FaInfo className="explanation-info" onClick={() => setExplanationModalOpen(true)}/>
             <div>
                 <div className="image-container" style={{display: isRunning ? 'block' : 'none'}}></div>
-                <StopWatch isRunning={isRunning} setIsRunning={setIsRunning} time={time} setTime = {setTime} setBorrowTime = {SetBorrowTime}/>
+                <StopWatch isRunning={isRunning} setIsRunning={setIsRunning} time={time} setTime = {setTime} setBorrowTime={SetBorrowTime}/>
             </div>
             <Explanation show={explanationModalOpen} onHide={() => setExplanationModalOpen(false)} />
         </div>

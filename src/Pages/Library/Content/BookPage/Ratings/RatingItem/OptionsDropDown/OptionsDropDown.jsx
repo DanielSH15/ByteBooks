@@ -12,7 +12,7 @@ const OptionsDropDown = ({rating}) => {
     
     const DeleteRating = async() => {
         try{
-            await axios.delete(import.meta.env.VITE_BACKEND_URI + '/api/rating/' + rating.Id)
+            await axios.delete(import.meta.env.VITE_BACKEND_URI + '/api/rating/' + rating.ratingId)
             .then((response) => {
                 console.log(response.data)
             })

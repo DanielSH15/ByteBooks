@@ -1,0 +1,32 @@
+.navigation-bar-container-res{
+    height: 50px;
+    width: 100%;
+    background-color: rgb(26, 24, 24);
+    padding-top: 8px;
+}
+
+.navigation-bar-container-res .navigation-bar-res-logo{
+    font-size: 10px;
+}
+
+.navigation-bar-container-res .navigation-bar-res{
+    color: #FFF;
+
+}
+
+.navigation-bar-container-res .navigation-bar-res .toggle-bars{
+    cursor: pointer;
+    margin-left: 90%;
+}
+
+.navigation-bar-res-content{
+    background-color: rgb(26, 24, 24);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    display: flex;
+    transition: 0.5s ease;
+}

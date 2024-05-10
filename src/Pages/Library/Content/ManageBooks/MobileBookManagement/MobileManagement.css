@@ -1,0 +1,25 @@
+.mobile-management-wrapper{
+    width:100vw;
+    height: 100vh;
+    padding-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mobile-management-wrapper .mobile-book-search input{
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    outline: none;
+}
+
+.mobile-management-wrapper .mobile-management-content{
+    padding: 15px;
+}
+
+.mobile-management-wrapper .mobile-management-content .manage-books-mobile-items-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

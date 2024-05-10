@@ -27,7 +27,7 @@
     color: #FFFF;
     outline: none;
     transition: all 0.3s ease;
-    width: 110%;
+    width: 60vh;
 }
 
 .inputData-login input:focus ~ label,
@@ -55,4 +55,10 @@
     color: red;
     display: block;
     margin-left: 1.5vw;
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper-login .inputData-login input{
+        width: 40vh;
+    }
 }

@@ -2,18 +2,22 @@ import React, {useState, useEffect} from 'react'
 import { Modal } from 'react-bootstrap'
 import { userSchema } from '../../../Validations/UserValidation'
 import { useFormik } from 'formik'
-import { GetGenres, GetUserGenres, RefreshToken, Update } from './Data/Data'
+import { GetGenres, GetUserGenres, RefreshToken, Update, deleteUser } from './Data/Data'
 import Input from '../../Input/Input'
 import MultiSelectInput from '../../Input/MultiSelectInput'
 import SelectInput from '../../Input/SelectInput'
 import MessageContent from '../MessageContent/MessageContent'
+import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmationModal'
+import { Link } from 'react-router-dom'
 
 const UpdateProfileModal = ({show, onHide, user}) => {
     const[genres, setGenres] = useState([])
     const[genders, setGenders] = useState(['Male', 'Female'])
     const[selectedGenres, setSelectedGenres] = useState([])
     const[openModal, setOpenModal] = useState(false)
+    const[openDeleteModal, setOpenDeleteModal] = useState(false)
     const[message, setMessage] = useState([])
+    const userId = JSON.parse(localStorage.getItem("userId"))
 
     const formik = useFormik({
         initialValues: {
@@ -66,6 +70,15 @@ const UpdateProfileModal = ({show, onHide, user}) => {
         formik.values.genres = selectedGenres.map((item, i) => item.value)
         console.log(formik.values)
         formik.handleSubmit()
+      }
+
+      const handleDelete = async() => {
+        try{
+          var res = await deleteUser(userId)
+          console.log(res)
+        } catch (e) {
+          console.log(e)
+        }
       }
 
       useEffect(() => {
@@ -136,12 +149,14 @@ const UpdateProfileModal = ({show, onHide, user}) => {
                     </div>
                     <div className='submitContainer'>
                         <button onClick={handleSubmit}>Update</button>
+                        <h4><Link style={{color: '#DB630C'}} onClick={() => setOpenDeleteModal(true)}>Delete Account</Link></h4>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
                   </Modal.Footer>
             </div>
             <MessageContent show={openModal} onHide={() => setOpenModal(false)} message={message}/>
+            <DeleteConfirmation show={openDeleteModal} onHide={() => setOpenDeleteModal(false)} onDelete={handleDelete}/>
         </Modal>
   )
 }

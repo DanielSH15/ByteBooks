@@ -31,8 +31,15 @@ const Books = () => {
 
   return (
     <div className='all-books-content-container'>
-       <BookList books={currentBooks} />
-       <Pagination booksPerPage={booksPerPage} totalBooks={data.length} paginate={paginate}/>
+      <div className='desktop-booklist'>
+        <BookList books={currentBooks} />
+      </div>
+      <div className='mobile-booklist'>
+        <BookList books={data} />
+      </div>
+       <div className='pagination-container'>
+        <Pagination booksPerPage={booksPerPage} totalBooks={data.length} paginate={paginate}/>
+       </div>
     </div>
   )
 }

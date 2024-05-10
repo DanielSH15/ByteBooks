@@ -1,0 +1,51 @@
+.applied-book-mobile-item{
+    width:100%;
+    height: 350px;
+    margin: 50px;
+}
+
+.applied-book-mobile-item  .applied-book-mobile-item-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:100%;
+    height:100%;
+    background-color: #07080B;
+    border-radius: 15px;
+    border: solid;
+    border-color: #FFF;
+    border-width: 1px;
+    padding: 20px;
+}
+
+.applied-book-mobile-item .applied-book-mobile-item-content .applied-book-mobile-item-data{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.applied-book-mobile-item .applied-book-mobile-item-content .applied-book-mobile-item-data img{
+    width: 80%;
+    height: 190px;
+}
+
+.applied-book-mobile-item .applied-book-mobile-item-content .applied-book-mobile-item-data h1{
+    color: #FFF;
+    margin-top: 2vh;
+}
+
+.applied-book-mobile-item  .applied-book-mobile-item-content .applied-book-mobile-actions{
+    width:100%;
+    display: flex;
+    justify-content: space-around;
+    font-size: 25px;
+    margin-top: 20px;
+}
+
+.applied-book-mobile-item .applied-book-mobile-item-content .applied-book-mobile-actions .applied-book-mobile-action-pencil{
+    color: #00ff80;
+}
+
+.applied-book-mobile-item .applied-book-mobile-item-content .applied-book-mobile-actions .applied-book-mobile-action-trash{
+    color: #FF0000;
+}
