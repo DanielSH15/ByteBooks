@@ -13,3 +13,13 @@
     align-items: center;
     padding:50px;
 }
+
+.user-applied-books-desktop .user-applied-back-to-library{
+    color: #D4B996FF;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    padding-left: 50px;
+    padding-top: 10px;
+}

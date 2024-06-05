@@ -11,3 +11,10 @@
     margin-top: 5vh;
     width: 80%;
 }
+
+.back-to-library-link-odb{
+    color: #D4B996FF;
+    position: absolute;
+    top: 13%;
+    left: 10%;
+}

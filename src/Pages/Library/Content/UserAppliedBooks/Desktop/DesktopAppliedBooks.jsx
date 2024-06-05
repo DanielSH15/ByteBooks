@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import convert from 'xml-js';
 import AppliedBookItem from '../AppliedBookItem/AppliedBookItem';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './DesktopAppliedBooks.css'
 
 const DesktopAppliedBooks = () => {
@@ -39,9 +40,17 @@ const DesktopAppliedBooks = () => {
   }, [])
 
 
+  if(response === undefined) {
+    return (
+      <div className='overdue-page-container' style={{flexDirection: 'column', textAlign: 'center'}}>
+        <h1 style={{color: '#FFF'}}>No applied books</h1>
+        <Link to='/library'><h2>Back To Library</h2></Link>
+      </div>
+    )
+  }
   return (
     <div className='user-applied-books-desktop'>
-      <h3 style={{ color: '#D4B996FF', cursor: 'pointer'}} onClick={() => navigate('/library')}>Back To Library</h3>
+      <h3 className='user-applied-back-to-library' onClick={() => navigate('/library')}>Back To Library</h3>
        <div className='user-applied-books-desktop-items'>
         {
           response?.map((value, i) => {

@@ -40,6 +40,11 @@ const ManagerSideNav = ({changePage}) => {
             path: '/pendingbooks'
         },
         {
+            name: "Recommendations",
+            icon: <FaStar />,
+            page: 'recommendations'
+        },
+        {
             name: "Overdue Books",
             icon: <HiCalendar />,
             path: '/overduebooks'

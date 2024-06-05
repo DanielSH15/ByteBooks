@@ -8,6 +8,8 @@ import axios from 'axios';
 import './EditAppliedBookModal.css'
 import BookInput from '../AddBook/Input/BookInput';
 import BookMultiselectInput from '../AddBook/Input/BookMultiselectInput';
+import SubmitButton from '../../Buttons/ModalButtons/SubmitButton/SubmitButton';
+import CancelButton from '../../Buttons/ModalButtons/CancelButton/CancelButton';
 
 
 const EditAppliedBookModal = ({show, onHide, book}) => {
@@ -27,7 +29,7 @@ const EditAppliedBookModal = ({show, onHide, book}) => {
         releaseDate: book.elements[4].elements[0].text,
         pages: book.elements[5].elements[0].text,
         photoFileName: book.elements[6].elements[0].text,
-        previewLink: ''
+        previewLink: book.elements[7].elements[0].text
     },
     validationSchema: bookSchema,
     onSubmit: async(values) => {
@@ -67,6 +69,7 @@ const EditAppliedBookModal = ({show, onHide, book}) => {
             +'<releaseDate>' + formik.values.releaseDate +'</releaseDate>'
             +'<pages>' + formik.values.pages +'</pages>'
             +'<photoFileName>'+ photofilename +'</photoFileName>'
+            +'<previewLink>' + formik.values.previewLink + '</previewLink>'
             +'<id>' + id + '</id>'
           +'</model>'
         + '</Update>'
@@ -190,6 +193,8 @@ const handleFileSelected = (e) => {
                         onBlur={formik.handleBlur} touched={formik.touched.releaseDate} error={formik.errors.releaseDate}/>
                         <BookInput label="Pages" type="number" placeholder="Pages" id="pages" defaultValue={formik.values.pages} onChange={formik.handleChange}
                         onBlur={formik.handleBlur} touched={formik.touched.pages} error={formik.errors.pages}/>
+                        <BookInput label="Preview Link" type="text" placeholder="Preview Link" id="previewLink" defaultValue={formik.values.previewLink} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.previewLink} error={formik.errors.previewLink}/>
                     </Form>
                         </Col>
                     
@@ -201,9 +206,13 @@ const handleFileSelected = (e) => {
                     
                 </Modal.Body>
                 <Modal.Footer>
-                <div className='actions-edit-container'>
-                  <button className='addbookM' onClick={HandleClickEdit}>Edit</button>
-                  <button className='canceladd' onClick={onHide}>Cancel</button>
+                <div className='apply-book-actions-container'>
+                  <div className='apply-book-submit-container'>
+                   <SubmitButton text="Edit" action={HandleClickEdit}/>
+                  </div>
+                  <div className='cancel-apply-container'>
+                    <CancelButton text="Cancel" action={onHide}/>
+                  </div>
                 </div>
                 <h2 style={{position: 'absolute', left: '2%'}}>{message}</h2>
                   </Modal.Footer>

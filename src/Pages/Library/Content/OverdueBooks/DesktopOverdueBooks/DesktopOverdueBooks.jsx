@@ -31,7 +31,7 @@ const DesktopOverdueBooks = () => {
 
   return (
     <div className='overdue-page-container'>
-        <Link to='/library' className='back-to-library-link'><h2>Back To Library</h2></Link>
+        <Link to='/library' style={{textDecoration: 'none'}} className='back-to-library-link-odb'><h2>Back To Library</h2></Link>
         <div className='overdue-books-container'>
             {
                 data?.map((value, i) => {

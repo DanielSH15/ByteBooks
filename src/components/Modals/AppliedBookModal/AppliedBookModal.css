@@ -4,7 +4,7 @@
     border-radius: 10px;
     position:absolute;
     top:92%;
-    right:30%;
+    right:25%;
     display: inline-block;
     margin: 0 auto;
     padding: 0;
@@ -27,7 +27,7 @@
     border-radius: 10px;
     position:absolute;
     top:92%;
-    right:50%;
+    right:45%;
     display: inline-block;
     margin: 0 auto;
     padding: 0;
@@ -41,5 +41,28 @@
 .decline-applied-book:hover{
     background-color: red;
     border-color: red;
+    color:white;
+}
+
+.read-more-applied-book{
+    width: 15%;
+    height: 40px;
+    border-radius: 10px;
+    position:absolute;
+    top:92%;
+    right:65%;
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0;
+    background-color: white;
+    border: solid;
+    border-color: blue;
+    color:blue;
+    border-width: 1px;
+}
+
+.read-more-applied-book:hover{
+    background-color: blue;
+    border-color: blue;
     color:white;
 }

@@ -2,11 +2,6 @@ import { HiHome } from "react-icons/hi"
 import { HiPencil } from "react-icons/hi"
 import { HiBookOpen } from "react-icons/hi"
 import { GrUserSettings } from "react-icons/gr"
-import { HiLogout } from "react-icons/hi"
-import UpdateProfileModal from '../../../../Modals/UpdateProfile/UpdateProfileModal'
-import { useState } from "react"
-import axios from "axios"
-import { useNavigate } from "react-router-dom"
 
 
 

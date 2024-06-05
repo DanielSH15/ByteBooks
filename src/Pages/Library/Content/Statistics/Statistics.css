@@ -1,3 +1,10 @@
 .book-stats-container{
     height: 50vh;
 }
+
+.back-to-library-link{
+    color: #D4B996FF;
+    position: absolute;
+    top: 13%;
+    left: 1%;
+}

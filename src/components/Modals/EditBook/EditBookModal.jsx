@@ -7,6 +7,8 @@ import { GetCurrentGenres, GetGenres, UpdateBook } from './Data/Data';
 import BookInput from '../AddBook/Input/BookInput';
 import BookMultiselectInput from '../AddBook/Input/BookMultiselectInput';
 import MessageContent from '../MessageContent/MessageContent';
+import SubmitButton from '../../Buttons/ModalButtons/SubmitButton/SubmitButton';
+import CancelButton from '../../Buttons/ModalButtons/CancelButton/CancelButton';
 
 const EditBookModal = ({show, onHide, book}) => {
     const [selectedOptions, setSelectedOptions] = useState([])
@@ -64,7 +66,6 @@ const EditBookModal = ({show, onHide, book}) => {
             formik.values.photoFileName = import.meta.env.VITE_BACKEND_URI + '/Photos/book.jpg'
         }
         formik.values.genres = selectedOptions
-        formik.values.previewLink = book.previewLink
         formik.values.photoFileName = photofilename
         formik.handleSubmit();
         console.log(formik.values)
@@ -143,6 +144,8 @@ const EditBookModal = ({show, onHide, book}) => {
                         onBlur={formik.handleBlur} touched={formik.touched.releaseDate} error={formik.errors.releaseDate}/>
                         <BookInput label="Pages" type="number" placeholder="Pages" id="pages" defaultValue={formik.values.pages} onChange={formik.handleChange}
                         onBlur={formik.handleBlur} touched={formik.touched.pages} error={formik.errors.pages}/>
+                        <BookInput label="Preview Link" type="text" placeholder="Preview Link" id="previewLink" defaultValue={formik.values.previewLink} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.previewLink} error={formik.errors.previewLink}/>
                     </Form>
                         </Col>
                     
@@ -154,9 +157,13 @@ const EditBookModal = ({show, onHide, book}) => {
                     
                 </Modal.Body>
                 <Modal.Footer>
-                <div className='actions-edit-container'>
-                    <Button className='addbookM' onClick={handleSubmit}>Edit</Button>
-                    <Button className='canceladd' onClick={onHide}>Cancel</Button>
+                <div className='apply-book-actions-container'>
+                  <div className='apply-book-submit-container'>
+                   <SubmitButton text="Edit" action={handleSubmit}/>
+                  </div>
+                  <div className='cancel-apply-container'>
+                    <CancelButton text="Cancel" action={onHide}/>
+                  </div>
                 </div>
                   </Modal.Footer>
                   <MessageContent show={openModal} onHide={() => setOpenModal(false)} message={message}/>

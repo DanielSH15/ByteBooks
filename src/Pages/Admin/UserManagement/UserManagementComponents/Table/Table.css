@@ -1,42 +1,5 @@
-.users-table{
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 5vh;
-    background-color: #07080B;
-    color: #FFF;
-    font-size: 55px;
+.page-buttons-container{
     display: flex;
-    flex-direction: column;
     justify-content: center;
-}
-
-.user-table th, .user-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.user-table th {
-    background-color: #f2f2f2;
-}
-
-.search-user{
-    margin-left: 35vw;
-}
-
-.search-user input {
-    border: none;
-    border-bottom: 2px solid silver;
-    background: transparent;
-    color: #FFFF;
-    outline: none;
-    transition: all 0.3s ease;
-    margin: 5px;
-    height: 6vh;
-    padding: 10px;
-}
-
-
-.search-user input::placeholder{
-    font-size: 30px;
+    margin-top: 1rem;
 }

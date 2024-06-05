@@ -7,6 +7,9 @@ import BookInput from '../AddBook/Input/BookInput';
 import { GetGenres } from './Data/Data';
 import BookMultiselectInput from '../AddBook/Input/BookMultiselectInput';
 import MessageContent from '../MessageContent/MessageContent';
+import SubmitButton  from '../../Buttons/ModalButtons/SubmitButton/SubmitButton'
+import CancelButton from '../../Buttons/ModalButtons/CancelButton/CancelButton'
+import './ApplyBook.css'
 
 
 const ApplyBook = ({show, onHide}) => {
@@ -99,6 +102,7 @@ const ApplyBook = ({show, onHide}) => {
                 +'<releaseDate>' + formik.values.releaseDate +'</releaseDate>'
                 +'<pages>' + formik.values.pages +'</pages>'
                 +'<photoFileName>' + import.meta.env.VITE_BACKEND_URI + '/Photos/' + formik.values.photoFileName +'</photoFileName>'
+                +'<previewLink>' + formik.values.previewLink + '</previewLink>'
               +'</model>'
               +'<pendingBook>'
                 +'<userId>' + userId +'</userId>'
@@ -130,9 +134,8 @@ const ApplyBook = ({show, onHide}) => {
     const handleSubmit = async(e) => {
       e.preventDefault();
       if(formik.values.photoFileName === ""){
-          formik.values.photoFileName = import.meta.env.VITE_BACKEND_URI + '/Photos/book.jpg'
-      }
-      formik.values.previewLink = "previewLink"
+          formik.values.photoFileName = '/Photos/book.jpg'
+      } 
       formik.handleSubmit();
       console.log(formik.values)
   }
@@ -147,6 +150,7 @@ const ApplyBook = ({show, onHide}) => {
           }
         }
         GetSelectGenres()
+        console.log(formik.values.photoFileName)
     }, [])
   return (
     <Modal
@@ -174,6 +178,8 @@ const ApplyBook = ({show, onHide}) => {
                         onBlur={formik.handleBlur} touched={formik.touched.releaseDate} error={formik.errors.releaseDate}/>
                         <BookInput label="Pages" type="number" placeholder="Pages" id="pages" defaultValue={formik.values.pages} onChange={formik.handleChange}
                         onBlur={formik.handleBlur} touched={formik.touched.pages} error={formik.errors.pages}/>
+                        <BookInput label="Preview Link" type="text" placeholder="Preview Link" id="previewLink" defaultValue={formik.values.previewLink} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.previewLink} error={formik.errors.previewLink}/>
                     </Form>
                         </Col>
                     
@@ -185,10 +191,14 @@ const ApplyBook = ({show, onHide}) => {
                     
                 </Modal.Body>
                 <Modal.Footer>
-                <Button className='addbookM' onClick={handleSubmit}>Apply</Button>
-                <Button className='canceladd' onClick={onHide}>Cancel</Button>
-                <br />
-                <br />
+                <div className='apply-book-actions-container'>
+                  <div className='apply-book-submit-container'>
+                   <SubmitButton text="Apply" action={handleSubmit}/>
+                  </div>
+                  <div className='cancel-apply-container'>
+                    <CancelButton text="Cancel" action={onHide}/>
+                  </div>
+                </div>
                   </Modal.Footer>
                   <MessageContent show={openModal} onHide={() => setOpenModal(false)} message={response}/>
         </Modal>

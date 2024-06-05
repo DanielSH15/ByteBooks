@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import './DesktopBookPage.css'
 import axios from 'axios';
@@ -6,6 +6,7 @@ import BorrowBookInfo from '../../../../../components/Modals/BorrowBookAction/Bo
 import PagesPerDay from '../../../../../components/Modals/PagesPerDayModal/PagesPerDay';
 import MessageContent from '../../../../../components/Modals/MessageContent/MessageContent';
 import Ratings from '../Ratings/Ratings';
+import { BorrowTimeContext } from '../../../../../components/Contexts/BorrowTimeContext/BorrowTimeContext';
 
 const DesktopBookPage = ({book}) => {
     const navigate = useNavigate()
@@ -20,6 +21,7 @@ const DesktopBookPage = ({book}) => {
     const[readMore, setIsReadMore] = useState(false)
     const[messageModalOpen, setMessageModalOpen] = useState(false)
     const[isBanned, setIsBanned] = useState(false)
+    const {borrowTime} = useContext(BorrowTimeContext)
     const maxChars = 445;
     var imgsrc =  book.photoFileName
   
@@ -109,12 +111,12 @@ const DesktopBookPage = ({book}) => {
     
      const ButtonAction = () => {
       if(isBanned === false){
-        if(localStorage.getItem("borrowTime") != "0" && book.copies > "0"){
+        if(borrowTime != 0 && book.copies > "0"){
           return <button onClick={() => setPagesPerDayOpen(true)}>Borrow</button>
         } else if(book.copies <= "0"){
           return <button onClick={() => {setModalVisible(true); setError("No copies left.")}}>Borrow</button>
-        } else if(localStorage.getItem("borrowTime") === "0"){
-          return <Link to='/readingtest' state={{book: location.state.book}}><button>Borrow</button></Link>
+        } else if(borrowTime === 0){
+          return <Link to='/readingtest'><button>Borrow</button></Link>
         }
       } else {
         return <button onClick={() => {setModalVisible(true); setError("You are banned from borrowing books.")}}>Borrow</button>

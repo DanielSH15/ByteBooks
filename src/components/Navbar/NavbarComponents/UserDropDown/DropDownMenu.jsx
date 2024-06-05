@@ -33,7 +33,7 @@ const DropDownMenu = (props) => {
 
         <div className={`dropdownMenu ${open? 'active' : 'inactive'}`}>
           <h3>{props.username}<br /> <span>User</span></h3>
-          <DropDownItem icon = {<HiPencil />} text = "Profile" location="/updateprofile"/>
+          <DropDownItem icon = {<HiPencil />} text = "Profile" location="/updateprofile" do = {() => {setOpen(false)}}/>
           <DropDownItem icon = {<HiBookOpen />} text = "Your books" location = "/cart" do = {() => {setOpen(false)}}/>
           <DropDownItem icon = {<HiLogout />} text = "Logout" location = "/" do = {logout}/>
           <UpdateProfileModal show={openProfileModal} onHide={() => setOpenProfileModal(false)} user={props.user}/>
@@ -48,7 +48,7 @@ const DropDownMenu = (props) => {
         </div>
         <div className={`dropdownMenu ${open? 'active' : 'inactive'}`}>
           <h3>{props.username}<br /> <span>Moderator</span></h3>
-          <DropDownItem icon = {<HiPencil />} text = "Profile"  location="/updateprofile"/>
+          <DropDownItem icon = {<HiPencil />} text = "Profile"  location="/updateprofile" do = {() => {setOpen(false)}}/>
           <DropDownItem icon = {<HiBookOpen />} text = "Your books" location = "/cart" do = {() => {setOpen(false)}}/>
           <DropDownItem icon = {<HiLogout />} text = "Logout" location = "/" do = {logout}/>
           <UpdateProfileModal show={openProfileModal} onHide={() => setOpenProfileModal(false)} user={props.user}/>

@@ -81,7 +81,6 @@ const AddBook = ({show, onHide}) => {
         if(formik.values.photoFileName === ""){
             formik.values.photoFileName = import.meta.env.VITE_BACKEND_URI + '/Photos/book.jpg'
         }
-        formik.values.previewLink = "previewLink"
         formik.handleSubmit();
         console.log(formik.values)
     }
@@ -126,7 +125,8 @@ const AddBook = ({show, onHide}) => {
                         onBlur={formik.handleBlur} touched={formik.touched.releaseDate} error={formik.errors.releaseDate}/>
                         <BookInput label="Pages" type="number" placeholder="Pages" id="pages" defaultValue={formik.values.pages} onChange={formik.handleChange}
                         onBlur={formik.handleBlur} touched={formik.touched.pages} error={formik.errors.pages}/>
-                        
+                        <BookInput label="Preview Link" type="text" placeholder="Preview Link" id="previewLink" defaultValue={formik.values.previewLink} onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} touched={formik.touched.previewLink} error={formik.errors.previewLink}/>
                     </Form>
                         </Col>
                     

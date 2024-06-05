@@ -4,7 +4,7 @@ import DataField from './Components/InitialDataField/DataField'
 import { Link } from 'react-router-dom'
 import { userSchema } from '../../Validations/UserValidation'
 import { useFormik } from 'formik'
-import { GetUserGenres, RefreshToken, Update, deleteUser } from './Data/Data'
+import { GetUserGenres, Update, deleteUser } from './Data/Data'
 import { Context } from '../../components/Contexts/AuthContext/AuthContext'
 import { GenreContext } from '../../components/Contexts/GenreContext/GenreContext'
 import MessageContent from '../../components/Modals/MessageContent/MessageContent'
@@ -20,6 +20,8 @@ const UpdateProfile = () => {
     const [loading, setLoading] = useState(true);
     const[userGender, setUserGender] = useState()
     const { user } = useContext(Context)
+    const { logout } = useContext(Context)
+    const { refreshToken } = useContext(Context)
     const { genres } = useContext(GenreContext)
 
     const genders = ['Male', 'Female']
@@ -89,7 +91,7 @@ const UpdateProfile = () => {
         }
         try{
           const response = await Update(update)
-          //await RefreshToken(update)
+          await refreshToken(update)
           console.log(values)
           setMessage(response)
           setOpenModal(true);
@@ -143,6 +145,7 @@ const UpdateProfile = () => {
       const handleDelete = async() => {
         try{
           var res = await deleteUser(userId)
+          logout()
           console.log(res)
         } catch (e) {
           console.log(e)
@@ -187,7 +190,7 @@ const UpdateProfile = () => {
         </div>
         <div className='update-profile-actions'>
             <button onClick={handleSubmit}>Update Profile</button>
-            <div className='delete-profile-action'><Link style={{color: "#DB630C"}}>Delete Account</Link></div>
+            <div className='delete-profile-action'><Link style={{color: "#DB630C"}} onClick={() => setOpenDeleteModal(true)}>Delete Account</Link></div>
         </div>
         <MessageContent show={openModal} onHide={() => setOpenModal(false)} message={message}/>
         <DeleteConfirmationModal show={openDeleteModal} onHide={() => setOpenDeleteModal(false)} onDelete={handleDelete}/>

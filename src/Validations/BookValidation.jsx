@@ -7,5 +7,6 @@ export const bookSchema = yup.object().shape({
     description: yup.string().required("Description is required"),
     releaseDate: yup.string().required("Release date is required"),
     pages: yup.string().required("Number of pages is required"),
-    photoFileName: yup.string().required("Photo file name is required")
+    photoFileName: yup.string().required("Photo file name is required"),
+    previewLink: yup.string().required("Preview link is required")
 })

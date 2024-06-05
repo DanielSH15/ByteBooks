@@ -28,7 +28,7 @@ const AppliedBookModal = ({show, onHide, book}) => {
     }
     xmlhttp.setRequestHeader('Content-Type', 'text/xml');
     xmlhttp.send(sr);
-    window.location.reload(false)
+    //window.location.reload(false)
   }
 
   const HandleClickDecline = () => {
@@ -73,6 +73,7 @@ const AppliedBookModal = ({show, onHide, book}) => {
                 <Modal.Footer>
                 <Button className='approve-applied-book' onClick={HandleClickApprove}>Approve</Button>
                 <Button className='decline-applied-book' onClick={HandleClickDecline}>Decline</Button>
+                <a href={book.elements[7].elements[0].text}><Button className='read-more-applied-book'>Read More</Button></a>
                 <br />
                 <br />
                   </Modal.Footer>

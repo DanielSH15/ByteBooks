@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import './ReadingTest.css'
 import { useLocation, useNavigate } from "react-router-dom";
 import StopWatch from "./StopWatch/StopWatch";
 import Explanation from "../../../../components/Modals/ReadingTestExplanation/Explanation";
 import axios from "axios";
 import {FaInfo} from 'react-icons/fa'
+import { Context } from "../../../../components/Contexts/AuthContext/AuthContext";
 
 const ReadingTest = () => {
     const[explanationModalOpen, setExplanationModalOpen] = useState(true)
     const[isRunning, setIsRunning] = useState(false)
     const[time, setTime] = useState(0)
     const location = useLocation()
+    const {refreshToken} = useContext(Context)
     const navigate = useNavigate()
 
     var insert = {
@@ -24,6 +26,7 @@ const ReadingTest = () => {
             .then((response) => {
                 console.log(response.data)
                 localStorage.setItem("borrowTime", response.data)
+                refreshToken()
             })
             navigate('/library')
         } catch (e){
