@@ -2,8 +2,10 @@ import React from 'react'
 import {HiX} from'react-icons/hi' 
 import './BookInfoModal.css'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const BookInfoModal = ({show, book, onClose}) => {
+  const navigate = useNavigate()
     if(!show){
         return null
     }
@@ -27,6 +29,7 @@ const BookInfoModal = ({show, book, onClose}) => {
         await axios.post(import.meta.env.VITE_BACKEND_URI + '/api/book', insert)
         .then((response) => {
           console.log(response.data)
+          navigate('/library')
         })
       } catch (e) {
         console.log(e.response.data)

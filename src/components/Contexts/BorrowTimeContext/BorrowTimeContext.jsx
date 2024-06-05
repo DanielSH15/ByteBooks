@@ -6,6 +6,7 @@ const BorrowTimeContext = createContext()
 
 const BorrowTimeProvider = ({children}) => {
     const [borrowTime, setBorrowTime] = useState(0)
+    const[isBanned, setIsBanned] = useState(false)
     const token = sessionStorage.getItem("token")
     const[user, setUser] = useState({})
 
@@ -30,11 +31,12 @@ const BorrowTimeProvider = ({children}) => {
 
     useEffect(() => {
         setBorrowTime(user.borrowTime)
+        setIsBanned(user.isBanned)
         console.log(user.borrowTime)
     }, [user])
 
   return (
-    <BorrowTimeContext.Provider value={{borrowTime}}>
+    <BorrowTimeContext.Provider value={{borrowTime, isBanned}}>
         {children}
     </BorrowTimeContext.Provider>
   )

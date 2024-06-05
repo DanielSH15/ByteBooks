@@ -22,6 +22,7 @@ const DesktopBookPage = ({book}) => {
     const[messageModalOpen, setMessageModalOpen] = useState(false)
     const[isBanned, setIsBanned] = useState(false)
     const {borrowTime} = useContext(BorrowTimeContext)
+    const {isBannedCon} = useContext(BorrowTimeContext)
     const maxChars = 445;
     var imgsrc =  book.photoFileName
   
@@ -110,7 +111,7 @@ const DesktopBookPage = ({book}) => {
      }
     
      const ButtonAction = () => {
-      if(isBanned === false){
+      if(isBanned === false && isBannedCon === false){
         if(borrowTime != 0 && book.copies > "0"){
           return <button onClick={() => setPagesPerDayOpen(true)}>Borrow</button>
         } else if(book.copies <= "0"){
@@ -118,7 +119,7 @@ const DesktopBookPage = ({book}) => {
         } else if(borrowTime === 0){
           return <Link to='/readingtest'><button>Borrow</button></Link>
         }
-      } else {
+      } else  {
         return <button onClick={() => {setModalVisible(true); setError("You are banned from borrowing books.")}}>Borrow</button>
       }
      }
